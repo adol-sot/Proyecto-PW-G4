@@ -4,6 +4,7 @@ import './main.css'
 import LoginPage from './pages/LoginPage'
 import CambiarContrasena from './pages/CambiarContrasena'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import UserMainPage from './pages/UserMainPage'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -11,6 +12,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' element={<LoginPage />}/>
         <Route path='/cambiarcontra' element={<CambiarContrasena />}/>
+        <Route path='/usermain' element={ <UserMainPage />}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
