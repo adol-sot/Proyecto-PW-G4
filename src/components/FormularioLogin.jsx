@@ -18,7 +18,7 @@ function FormularioLogin() {
             </button>
         </div>
         <div>
-            <Link className="text-sm mt-4 place-self-center" href="#"> ¿No tienes una cuenta? </Link>
+            <Link className="text-sm mt-4 place-self-center hover:underline"> ¿No tienes una cuenta? </Link>
         </div>
     </form>
 }
