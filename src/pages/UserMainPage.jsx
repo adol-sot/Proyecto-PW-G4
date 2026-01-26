@@ -1,5 +1,9 @@
+import ListadoEgresos from "../components/ListadoEgresos"
+
 function UserMainPage() {
-    return <h1> User Main Page </h1>
+    return <div>
+        <ListadoEgresos />
+    </div>
 }
 
 export default UserMainPage

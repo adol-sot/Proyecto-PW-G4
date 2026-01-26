@@ -23,7 +23,7 @@ function FormularioLogin({ onLogin }) {
             <label className="ml-1"> Contraseña </label>
             <input className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm" type="password" 
             value={ contra } onChange={ contraOnChange }/>
-            <Link to="/cambiarcontra" className="text-sm mt-1 text-blue-900 hover:text-amber-600" href="#"> ¿Olvidaste tu contraseña? </Link>
+            <Link to="/cambiarcontra" className="text-sm mt-1 text-blue-900 hover:text-amber-600"> ¿Olvidaste tu contraseña? </Link>
         </div>
 
         <div className="mt-4">
