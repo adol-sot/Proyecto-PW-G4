@@ -10,6 +10,9 @@ function LoginPage() {
         if (correo == "User@abc" && contra == "123") {
             console.log("Login Usuario Autentificado")
             navigate("/usermain")
+        } if (correo == "Admin@abc" && contra == "123") {
+            console.log("Login Admin Autentificado")
+            navigate("/adminmain")
         } else {
             console.log("Credenciales Incorrectas")
         }
