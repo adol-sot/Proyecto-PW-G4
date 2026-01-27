@@ -1,3 +1,4 @@
+import { useState } from "react"
 import ListadoEgresos from "../components/ListadoEgresos"
 
 const listaEgresos = [
