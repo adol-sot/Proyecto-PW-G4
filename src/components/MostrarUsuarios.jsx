@@ -42,9 +42,13 @@ function MostrarUsuarios() {
         role: "Usuario",
       };
       setUsers(users.concat(nuevoUsuario));
+
+        setNombre("");
+        setApellido("");
+        setCorreo("");
+
     } else {
-      const usuariosActualizados = users.map(user =>
-        user.id === idEditar
+      const usuariosActualizados = users.map(user => user.id === idEditar
           ? {
               ...user,
               nombre: nombre,
@@ -57,9 +61,7 @@ function MostrarUsuarios() {
       setIdEditar(null);
     }
 
-    setNombre("");
-    setApellido("");
-    setCorreo("");
+  
   }
 
   // Cargar datos al formulario
@@ -136,7 +138,7 @@ function MostrarUsuarios() {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr key={user.id} className="hover:bg-blue-200">
+            <tr key={user.id} className="hover:bg-blue-100">
               <td className="border p-2">{user.nombre}</td>
               <td className="border p-2">{user.apellido}</td>
               <td className="border p-2">{user.email}</td>
