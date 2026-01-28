@@ -16,9 +16,14 @@ const listaEgresos = [
 
 ]
 
+import Navegacion from "../components/Navegacion"
+
 function UserMainPage() {
-    return <div>
-        <ListadoEgresos egresos={listaEgresos} />
+    return <div className="min-h-screen bg-blue-900">
+        <Navegacion />
+        <div className="p-8">
+            <ListadoEgresos egresos={listaEgresos} />
+        </div>
     </div>
 }
 
