@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ListadoEgresos from "../components/ListadoEgresos"
+import PresupuestoCategoria from "../components/PresupuestoCategoria";
 
 const listaEgresos = [
     {
@@ -53,6 +54,7 @@ function UserMainPage() {
     }
     return <div>
         <ListadoEgresos egresos={listaEgresos} />
+        <PresupuestoCategoria egresos={listaEgresos} />
         
         <div className="flex justify-center mt-6">
             <button
