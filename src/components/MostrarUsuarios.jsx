@@ -163,6 +163,6 @@ function MostrarUsuarios ()  {
 
     </div>
   );
-};
+}
 
 export default MostrarUsuarios;
