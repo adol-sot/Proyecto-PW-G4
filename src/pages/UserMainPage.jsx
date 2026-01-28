@@ -1,5 +1,8 @@
 import { useState } from "react"
 import ListadoEgresos from "../components/ListadoEgresos"
+import Navegacion from "../components/Navegacion"
+import { useNavigate } from "react-router-dom";
+import PresupuestoCategoria from "../components/PresupuestoCategoria";
 
 /*
 const listaEgresos = [
@@ -56,10 +59,6 @@ const listaEgresos = [
     }
   ];
 
-
-import Navegacion from "../components/Navegacion"
-import { useNavigate } from "react-router-dom";
-
 function UserMainPage() {
 
     const navigate = useNavigate()
@@ -76,6 +75,7 @@ function UserMainPage() {
         <Navegacion />
         <div className="p-8">
             <ListadoEgresos egresos={listaEgresos} />
+            <PresupuestoCategoria egresos={listaEgresos} />
         </div>
 
         <div className="flex justify-center mt-6">
