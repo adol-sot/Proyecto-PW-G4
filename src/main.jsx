@@ -9,6 +9,8 @@ import UserMainPage from './pages/UserMainPage'
 import UserMainPageFiltros from './pages/UserMainPageFiltros'
 import AdminMainPage from './pages/AdminMainPage'
 import Navegacion from './components/Navegacion'
+import FiltrarGraficoEgreso from './pages/FiltrarGraficoEgreso'
+import UserMainPageSeguridad from './pages/UserMainPageSeguridad'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -20,6 +22,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='/usermain' element={ <UserMainPage />}/>
         <Route path='/usermainfiltros' element={ <UserMainPageFiltros />}/>
         <Route path='/adminmain' element={ <AdminMainPage />}/>
+        <Route path='/grafico-egresos' element={ <FiltrarGraficoEgreso />}/>
+        <Route path='/usermainseguridad' element={ <UserMainPageSeguridad />}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
