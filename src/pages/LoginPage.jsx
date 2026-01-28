@@ -8,9 +8,11 @@ function LoginPage() {
 
     function login(correo, contra) {
         if (correo == "User@abc" && contra == "123") {
+            localStorage.setItem("esAdmin", "false")
             console.log("Login Usuario Autentificado")
             navigate("/usermain")
-        } if (correo == "Admin@abc" && contra == "123") {
+        } else if (correo == "Admin@abc" && contra == "123") {
+            localStorage.setItem("esAdmin", "true")
             console.log("Login Admin Autentificado")
             navigate("/adminmain")
         } else {

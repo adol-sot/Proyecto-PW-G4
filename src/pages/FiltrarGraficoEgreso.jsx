@@ -11,7 +11,7 @@ function FiltrarGraficoEgreso(){
 
     const [tipoGrafico, setTipoGrafico] = useState("categoria");
 
-    return <div className="flex justify-center items-center min-h-screen">
+    return <div className="flex justify-center items-center min-h-screen bg-blue-900">
         <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
             <h2 className="text-center text-xl font-semibold mb-4">
                 Distribución de egresos
