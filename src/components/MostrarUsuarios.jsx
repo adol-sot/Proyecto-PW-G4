@@ -136,7 +136,7 @@ function MostrarUsuarios() {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr key={user.id} className="hover:bg-blue-100">
+            <tr key={user.id} className="hover:bg-blue-200">
               <td className="border p-2">{user.nombre}</td>
               <td className="border p-2">{user.apellido}</td>
               <td className="border p-2">{user.email}</td>
