@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function MostrarUsuarios() {
 
-  // Lista de usuarios (simulada)
-  const [users, setUsers] = useState([
-    { id: 1, nombre: "Juan", apellido: "Pérez", email: "juan@gmail.com", role: "Usuario" },
-    { id: 2, nombre: "Ana", apellido: "Torres", email: "ana@gmail.com", role: "Usuario" },
-    { id: 3, nombre: "Carlos", apellido: "Guerra", email: "carlos@gmail.com", role: "Usuario" },
-    { id: 4, nombre: "Santiago", apellido: "Gomez", email: "santiago@gmail.com", role: "Usuario" },
-    { id: 5, nombre: "Pamela", apellido: "Aquino", email: "pamela@gmail.com", role: "Usuario" },
-  ]);
+  // Lista de usuarios (desde localStorage o datos iniciales)
+  const [users, setUsers] = useState(() => {
+    const datosGuardados = localStorage.getItem("usuarios");
+    return datosGuardados
+      ? JSON.parse(datosGuardados)
+      : [
+          { id: 1, nombre: "Juan", apellido: "Pérez", email: "juan@gmail.com", role: "Usuario" },
+          { id: 2, nombre: "Ana", apellido: "Torres", email: "ana@gmail.com", role: "Usuario" },
+          { id: 3, nombre: "Carlos", apellido: "Guerra", email: "carlos@gmail.com", role: "Usuario" },
+          { id: 4, nombre: "Santiago", apellido: "Gomez", email: "santiago@gmail.com", role: "Usuario" },
+          { id: 5, nombre: "Pamela", apellido: "Aquino", email: "pamela@gmail.com", role: "Usuario" },
+        ];
+  });
+
+  // Guardar en localStorage cada vez que cambie users
+  useEffect(() => {
+    localStorage.setItem("usuarios", JSON.stringify(users));
+  }, [users]);
 
   // Datos del formulario
   const [nombre, setNombre] = useState("");
@@ -24,7 +34,6 @@ function MostrarUsuarios() {
     e.preventDefault();
 
     if (idEditar === null) {
-      // CREAR
       const nuevoUsuario = {
         id: users.length + 1,
         nombre: nombre,
@@ -32,10 +41,8 @@ function MostrarUsuarios() {
         email: correo,
         role: "Usuario",
       };
-
       setUsers(users.concat(nuevoUsuario));
     } else {
-      // EDITAR
       const usuariosActualizados = users.map(user =>
         user.id === idEditar
           ? {
@@ -46,7 +53,6 @@ function MostrarUsuarios() {
             }
           : user
       );
-
       setUsers(usuariosActualizados);
       setIdEditar(null);
     }
@@ -130,7 +136,7 @@ function MostrarUsuarios() {
         </thead>
         <tbody>
           {users.map(user => (
-            <tr key={user.id}>
+            <tr key={user.id} className="hover:bg-blue-100">
               <td className="border p-2">{user.nombre}</td>
               <td className="border p-2">{user.apellido}</td>
               <td className="border p-2">{user.email}</td>
