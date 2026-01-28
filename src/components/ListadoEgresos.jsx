@@ -94,7 +94,7 @@ function ListadoEgresos({ egresos }) {
                                             {egreso.categoria}
                                         </span>
                                     </td>
-                                    <td className="p-3 text-right text-red-600 font-bold font-mono">
+                                    <td className="p-3 text-right text-red-600 font-bold">
                                         ${Number(egreso.monto).toFixed(2)}
                                     </td>
                                 </tr>
