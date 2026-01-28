@@ -1,3 +1,4 @@
+import MostrarUsuarios from "../components/MostrarUsuarios"
 import Navegacion from "../components/Navegacion"
 
 function AdminMainPage() {
@@ -106,132 +107,13 @@ function AdminMainPage() {
                             </div>
                         </div>
                         
-                        <div className="overflow-x-auto">
-                            <table className="w-full border-collapse">
-                                <thead className="bg-gray-200">
-                                    <tr>
-                                        <th className="p-3 text-left text-sm uppercase">Nombre</th>
-                                        <th className="p-3 text-left text-sm uppercase">Correo Electrónico</th>
-                                        <th className="p-3 text-left text-sm uppercase">Rol</th>
-                                        <th className="p-3 text-left text-sm uppercase">Fecha de Registro</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">María González</td>
-                                        <td className="p-3">maria.gonzalez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">15 de enero de 2025</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Juan Pérez</td>
-                                        <td className="p-3">juan.perez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">10 de enero de 2025</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Ana Martínez</td>
-                                        <td className="p-3">ana.martinez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">5 de enero de 2025</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Carlos Rodríguez</td>
-                                        <td className="p-3">carlos.rodriguez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">1 de enero de 2025</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Laura Sánchez</td>
-                                        <td className="p-3">laura.sanchez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">28 de diciembre de 2024</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Diego Fernández</td>
-                                        <td className="p-3">diego.fernandez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">20 de diciembre de 2024</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Sofía López</td>
-                                        <td className="p-3">sofia.lopez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">15 de diciembre de 2024</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Miguel Torres</td>
-                                        <td className="p-3">miguel.torres@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">10 de diciembre de 2024</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Isabella Ramírez</td>
-                                        <td className="p-3">isabella.ramirez@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">5 de diciembre de 2024</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Andrés Morales</td>
-                                        <td className="p-3">andres.morales@email.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-                                                👤 Usuario
-                                            </span>
-                                        </td>
-                                        <td className="p-3">1 de diciembre de 2024</td>
-                                    </tr>
-                                    <tr className="border-t hover:bg-amber-600 hover:text-white">
-                                        <td className="p-3">Administrador</td>
-                                        <td className="p-3">admin@admin.com</td>
-                                        <td className="p-3">
-                                            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
-                                                👑 Administrador
-                                            </span>
-                                        </td>
-                                        <td className="p-3">1 de enero de 2025</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
+                
+                <div className="mt-10">
+                    <MostrarUsuarios />
+                </div>
+                
             </div>
         </div>
     </div>
