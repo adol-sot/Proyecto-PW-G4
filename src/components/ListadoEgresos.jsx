@@ -1,4 +1,3 @@
-import React from 'react';
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable';
 
@@ -86,7 +85,7 @@ function ListadoEgresos({ egresos }) {
                                 
                                 <tr 
                                     key={index} 
-                                    className="border-t border-gray-100 hover:bg-amber-50 transition duration-150 text-gray-800"
+                                    className="border-t border-gray-100 hover:bg-amber-100 transition duration-150 text-gray-800"
                                 >
                                     <td className="p-3">{egreso.fecha}</td>
                                     <td className="p-3">{egreso.descripcion}</td>
