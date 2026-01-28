@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function PresupuestoCategoria({ egresos }) {
 
-  const [categoria, setCategoria] = useState("Alimentos");
+  const [categoria, setCategoria] = useState("");
   const [presupuesto, setPresupuesto] = useState("");
 
   // Filtrar gastos por categoría seleccionada
