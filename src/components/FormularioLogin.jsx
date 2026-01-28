@@ -35,7 +35,7 @@ function FormularioLogin({ onLogin }) {
             </button>
         </div>
         <div>
-            <Link className="text-sm mt-4 place-self-center hover:underline"> ¿No tienes una cuenta? </Link>
+            <Link to="/register" className="text-sm mt-4 place-self-center hover:underline"> ¿No tienes una cuenta? </Link>
         </div>
     </form>
 }

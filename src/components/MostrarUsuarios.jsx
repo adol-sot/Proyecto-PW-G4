@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function MostrarUsuarios() {
+function MostrarUsuarios ()  {
 
   // Lista de usuarios (desde localStorage o datos iniciales)
   const [users, setUsers] = useState(() => {
@@ -16,7 +16,7 @@ function MostrarUsuarios() {
         ];
   });
 
-  // Guardar en localStorage cada vez que cambie users
+   // Guardar en localStorage cada vez que cambie users
   useEffect(() => {
     localStorage.setItem("usuarios", JSON.stringify(users));
   }, [users]);
@@ -60,8 +60,6 @@ function MostrarUsuarios() {
       setUsers(usuariosActualizados);
       setIdEditar(null);
     }
-
-  
   }
 
   // Cargar datos al formulario
@@ -79,7 +77,7 @@ function MostrarUsuarios() {
   }
 
   return (
-    <div className="bg-white shadow rounded p-4">
+     <div className="bg-white shadow rounded p-4 rounded-xl">
 
       <h2 className="text-lg font-bold mb-6">Gestión de Usuarios</h2>
 
