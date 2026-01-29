@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import ListadoEgresos from "../components/ListadoEgresos"
 import Navegacion from "../components/Navegacion"
 import PresupuestoCategoria from "../components/PresupuestoCategoria";
+import FiltrarGraficoEgreso from "./FiltrarGraficoEgreso";
 
 /*
 const listaEgresos = [
@@ -85,17 +86,17 @@ const listaEgresos = [
 
 function UserMainPage() {
 
-    const navigate = useNavigate()
+    const [mostrarGrafico, setMostrarGrafico] = useState(false);
 
-    function verGrafico(){
-        navigate("/grafico-egresos", {
-            state: {
-                egresos: listaEgresos
-            }
-        })
+    function abrirGrafico() {
+      setMostrarGrafico(true)
     }
 
-    return <div className="min-h-screen bg-blue-900">
+    function cerrarGrafico() {
+      setMostrarGrafico(false)
+    }
+
+      return <div className="min-h-screen bg-blue-900 relative">
         <Navegacion />
         <div className="p-8">
             <ListadoEgresos egresos={listaEgresos} />
@@ -105,11 +106,17 @@ function UserMainPage() {
         <div className="flex justify-center mt-6">
             <button
                 type="button"
-                onClick={verGrafico}
+                onClick={abrirGrafico}
                 className="mb-10 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Ver gráfico de egresos
             </button>
         </div>
+
+        {mostrarGrafico ? (
+          <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+            <FiltrarGraficoEgreso egresos={listaEgresos} cerrar={function(){setMostrarGrafico(false)}}/>
+          </div>
+        ): null}
     </div>
 }
 

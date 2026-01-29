@@ -27,7 +27,7 @@ function ListadoEgresos({ egresos }) {
                 egreso.descripcion,
                 egreso.categoria,
                 
-                `$${Number(egreso.monto || 0).toFixed(2)}`
+                `S/.${Number(egreso.monto || 0).toFixed(2)}`
             ]),
             startY: 35,
             theme: 'grid',
@@ -48,7 +48,7 @@ function ListadoEgresos({ egresos }) {
         
         doc.setFontSize(11);
         doc.setFont(undefined, 'bold'); 
-        doc.text(`Total: $${total.toFixed(2)}`, 14, finalY + 10);
+        doc.text(`Total: S/.${total.toFixed(2)}`, 14, finalY + 10);
 
         doc.save('egresos.pdf');
     };
@@ -95,7 +95,7 @@ function ListadoEgresos({ egresos }) {
                                         </span>
                                     </td>
                                     <td className="p-3 text-right text-red-600 font-bold">
-                                        ${Number(egreso.monto).toFixed(2)}
+                                        S/.{Number(egreso.monto).toFixed(2)}
                                     </td>
                                 </tr>
                             ))}
