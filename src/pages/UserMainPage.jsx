@@ -94,7 +94,7 @@ function UserMainPage() {
       setEgresoEnEdicion(egreso);
     };
 
-    const manejarGuardar = (formData) => {
+    const EditarGuardar = (formData) => {
       const egresosActualizados = egresos.map(egreso => 
         egreso === egresoEnEdicion 
           ? {
@@ -111,7 +111,7 @@ function UserMainPage() {
       setEgresoEnEdicion(null);
     };
 
-    const manejarCancelar = () => {
+    const EditarCancelar = () => {
       setEgresoEnEdicion(null);
     };
 
@@ -140,8 +140,8 @@ function UserMainPage() {
         {egresoEnEdicion && (
           <FormularioEditarEgreso 
             egreso={egresoEnEdicion} 
-            onGuardar={manejarGuardar} 
-            onCancelar={manejarCancelar}
+            onGuardar={EditarGuardar} 
+            onCancelar={EditarCancelar}
           />
         )}
     </div>
