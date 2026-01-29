@@ -77,7 +77,7 @@ function MostrarUsuarios ()  {
   }
 
   return (
-     <div className="bg-white shadow rounded p-4 rounded-xl">
+     <div className="bg-white shadow p-4 rounded-xl">
 
       <h2 className="text-lg font-bold mb-6">Gestión de Usuarios</h2>
 
