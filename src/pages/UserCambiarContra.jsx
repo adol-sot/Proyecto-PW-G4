@@ -9,7 +9,7 @@ function UserCambiarContra(){
             <h1 className="text-4xl font-bold place-self-center mb-6"> Cambiar Contraseña </h1  >
             <div>
                 <p className="my-6">Ingresa tu contraseña actual y tu nueva contraseña. Una vez completado te enviaremos un correo para confirmar la acción.</p>
-                <div className="grid">
+                <form className="grid">
                     <label className="text-sm font-medium mb-1">Contraseña actual</label>
                     <input type="password" className="rounded-full bg-gray-200 px-4 py-1"/>
                     <p className="text-sm mt-1 text-blue-900 hover:text-amber-600"> ¿Olvidaste tu contraseña? </p>
@@ -19,16 +19,16 @@ function UserCambiarContra(){
 
                     <label className="text-sm font-medium mb-1 mt-3">Confirmar contraseña</label>
                     <input type="password" className="rounded-full bg-gray-200 px-4 py-1"/>
-                </div>
+                </form>
 
-                <div className="flex justify-between items-center mt-6">
+                <form className="flex justify-between items-center mt-6">
                     <button onClick={function(){navigate("/usermainseguridad")}} type="button" className="bg-gray-300 px-6 py-2 rounded-full hover:bg-gray-400">
                         Cancelar
                     </button>
                     <button onClick={function(){navigate("/usermainseguridad")}} type="button" className="bg-yellow-300 px-6 py-2 rounded-full font-semibold text-black hover:bg-amber-600 hover:text-white">
                         Confirmar
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
