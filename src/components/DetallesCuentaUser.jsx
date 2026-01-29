@@ -4,7 +4,7 @@ function DetallesCuentaUser() {
     const navigate = useNavigate()
 
     return <div className="mt-6 px-10">
-        <img className="h-24 border-black rounded-lg place-self-center mb-5" src="/imagenes/PFP.jpg"/>
+        <img className="h-24 border-black rounded-lg mx-auto mb-5" src="/imagenes/PFP.jpg"/>
 
         <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 gap-1">
             <label className="ml-1 font-bold text-center">Nombre:</label>
