@@ -5,7 +5,7 @@ function UserCambiarContra(){
     const navigate = useNavigate()
 
     return <div className="flex justify-center items-center bg-blue-900 min-h-screen">
-        <div className="rounded-4xl shadow-md p-10 bg-white xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2">
+        <div className="rounded-4xl shadow-md p-10 bg-white xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 xs:w-1/2">
             <h1 className="text-4xl font-bold place-self-center mb-6"> Cambiar Contraseña </h1  >
             <div>
                 <p className="my-6">Ingresa tu contraseña actual y tu nueva contraseña. Una vez completado te enviaremos un correo para confirmar la acción.</p>
