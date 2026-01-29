@@ -43,7 +43,7 @@ function PresupuestoCategoria({ egresos }) {
         placeholder="Ingrese su presupuesto"
         value={presupuesto}
         onChange={e => setPresupuesto(e.target.value)}
-        className="border p-2 rounded-xl w-2xl mb-4 ml-5"
+        className="border p-2 rounded-xl w-2xl mb-4"
       />
 
       <p className="text-center" >Total gastado: <strong>S/ {totalGastos}</strong></p>
