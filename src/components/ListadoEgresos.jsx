@@ -1,72 +1,78 @@
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function ListadoEgresos({ egresos, onEditar }) {
-    
-    
-    
+function ListadoEgresos({ egresos, onEditar, abrir }) {
+
+    const navigate = useNavigate()
+
     const egresosOrdenados = [...egresos].sort((a, b) => {
         return new Date(b.fecha) - new Date(a.fecha);
     });
-   
-   const exportarPDF = () => {
+
+    const exportarPDF = () => {
         const doc = new jsPDF();
         const fecha = new Date().toLocaleDateString();
 
-        
+
         doc.setFontSize(16);
         doc.text('Reporte de Egresos', 14, 15);
 
         doc.setFontSize(10);
         doc.text(`Generado el: ${fecha}`, 14, 25);
 
-        
-        autoTable(doc,{
+
+        autoTable(doc, {
             head: [['Fecha', 'Descripción', 'Categoría', 'Monto']],
             body: egresosOrdenados.map(egreso => [
                 egreso.fecha,
                 egreso.descripcion,
                 egreso.categoria,
-                
+
                 `S/${Number(egreso.monto || 0).toFixed(2)}`
             ]),
             startY: 35,
             theme: 'grid',
             styles: { fontSize: 10, cellPadding: 3 },
             headStyles: { fillColor: [59, 130, 246], textColor: 255, halign: 'center' },
-            
+
             columnStyles: {
                 0: { halign: 'center' },
                 3: { halign: 'right' }
             }
         });
 
-        
+
         const total = egresosOrdenados.reduce((sum, egreso) => sum + Number(egreso.monto || 0), 0);
-        
-        
+
+
         const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : 35;
-        
+
         doc.setFontSize(11);
-        doc.setFont(undefined, 'bold'); 
+        doc.setFont(undefined, 'bold');
         doc.text(`Total: S/${total.toFixed(2)}`, 14, finalY + 10);
         doc.addImage('public/imagenes/Palisade_Logo2.jpeg', 'JPEG', 150, finalY + 5, 25, 10);
 
         doc.save('egresos.pdf');
     };
-    
+
 
     return (
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-semibold">Mis egresos</h2>
-                <button
-                    onClick={exportarPDF}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200"
-                >
-                    Exportar a PDF
-                </button>
+                <div className="flex gap-6">
+                    <button 
+                        onClick={function(){navigate("/gastos-atipicos")}}
+                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                        Ver gastos atipicos
+                    </button>
+                    <button
+                        onClick={exportarPDF}
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                        Exportar a PDF
+                    </button>
+                </div>
             </div>
 
             {egresosOrdenados.length === 0 ? (
@@ -86,9 +92,9 @@ function ListadoEgresos({ egresos, onEditar }) {
                         </thead>
                         <tbody>
                             {egresosOrdenados.map((egreso, index) => (
-                                
-                                <tr 
-                                    key={index} 
+
+                                <tr
+                                    key={index}
                                     className="border-t border-gray-100 hover:bg-amber-50 transition duration-150 text-gray-800"
                                 >
                                     <td className="p-3">{egreso.fecha}</td>
@@ -98,8 +104,8 @@ function ListadoEgresos({ egresos, onEditar }) {
                                             {egreso.categoria}
                                         </span>
                                     </td>
-                                    <td className="p-3 text-right text-red-600 font-bold font-mono">
-                                        ${Number(egreso.monto).toFixed(2)}
+                                    <td className="p-3 text-right text-red-600 font-bold">
+                                        S/.{Number(egreso.monto).toFixed(2)}
                                     </td>
                                     <td className="p-3 text-center">
                                         <button
@@ -113,7 +119,16 @@ function ListadoEgresos({ egresos, onEditar }) {
                             ))}
                         </tbody>
                     </table>
+                    <div className="flex justify-center mt-4">
+                        <button
+                            type="button"
+                            onClick={abrir}
+                            className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-black">
+                            Ver gráfico de egresos
+                        </button>
+                    </div>
                 </div>
+
             )}
         </div>
     );

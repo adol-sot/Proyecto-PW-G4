@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import GraficoEgresos from "../components/GraficoEgresos"
 import { useState } from "react";
 
