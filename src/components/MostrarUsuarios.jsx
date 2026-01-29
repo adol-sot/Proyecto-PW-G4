@@ -16,7 +16,7 @@ function MostrarUsuarios ()  {
         ];
   });
 
-   // Guardar en localStorage cada vez que cambie users
+  // Guardar en localStorage cada vez que cambie users
   useEffect(() => {
     localStorage.setItem("usuarios", JSON.stringify(users));
   }, [users]);
@@ -43,12 +43,13 @@ function MostrarUsuarios ()  {
       };
       setUsers(users.concat(nuevoUsuario));
 
-        setNombre("");
-        setApellido("");
-        setCorreo("");
+      setNombre("");
+      setApellido("");
+      setCorreo("");
 
     } else {
-      const usuariosActualizados = users.map(user => user.id === idEditar
+      const usuariosActualizados = users.map(user =>
+        user.id === idEditar
           ? {
               ...user,
               nombre: nombre,
@@ -77,12 +78,22 @@ function MostrarUsuarios ()  {
   }
 
   return (
-     <div className="bg-white shadow p-4 rounded-xl">
+    <div className="bg-white shadow p-4 rounded-xl">
 
-      <h2 className="text-lg font-bold mb-6">Gestión de Usuarios</h2>
+      <h2 className="text-lg font-bold mb-6 text-center md:text-left">
+        Gestión de Usuarios
+      </h2>
 
       {/* Formulario */}
-      <form onSubmit={crearUsuario} className="flex gap-4 mb-12 items-end">
+      <form
+        onSubmit={crearUsuario}
+        className="
+          grid grid-cols-1
+          sm:grid-cols-2
+          md:flex md:gap-4
+          gap-4 mb-12 items-end
+        "
+      >
 
         <div>
           <label>Nombre</label>
@@ -91,7 +102,7 @@ function MostrarUsuarios ()  {
             placeholder="Ingrese nombre"
             value={nombre}
             onChange={e => setNombre(e.target.value)}
-            className="border p-2 block rounded-md"
+            className="border p-2 block rounded-md w-full"
           />
         </div>
 
@@ -102,7 +113,7 @@ function MostrarUsuarios ()  {
             placeholder="Ingrese apellido"
             value={apellido}
             onChange={e => setApellido(e.target.value)}
-            className="border p-2 block rounded-md"
+            className="border p-2 block rounded-md w-full"
           />
         </div>
 
@@ -113,53 +124,63 @@ function MostrarUsuarios ()  {
             placeholder="Ingrese correo"
             value={correo}
             onChange={e => setCorreo(e.target.value)}
-            className="border p-2 block rounded-md"
+            className="border p-2 block rounded-md w-full"
           />
         </div>
 
-        <button className="bg-blue-600 text-white px-4 h-10 rounded-md">
+        <button
+          className="
+            bg-blue-600 text-white px-4 h-10 rounded-md
+            w-full sm:col-span-2 md:w-auto
+          "
+        >
           {idEditar === null ? "Crear" : "Guardar"}
         </button>
 
       </form>
 
       {/* Tabla */}
-      <table className="w-full border">
-        <thead className="bg-yellow-200">
-          <tr>
-            <th className="border p-2 text-left">Nombre</th>
-            <th className="border p-2 text-left">Apellido</th>
-            <th className="border p-2 text-left">Correo</th>
-            <th className="border p-2 text-left">Rol</th>
-            <th className="border p-2 text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id} className="hover:bg-blue-100">
-              <td className="border p-2">{user.nombre}</td>
-              <td className="border p-2">{user.apellido}</td>
-              <td className="border p-2">{user.email}</td>
-              <td className="border p-2">{user.role}</td>
-              <td className="border p-2 text-center">
-                <button
-                  onClick={() => editarUsuario(user)}
-                  className="bg-green-600 text-white px-2 rounded mr-2"
-                >
-                  Editar
-                </button>
-
-                <button
-                  onClick={() => eliminarUsuario(user.id)}
-                  className="bg-red-600 text-white px-2 rounded"
-                >
-                  Eliminar
-                </button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full border min-w-700px">
+          <thead className="bg-yellow-200">
+            <tr>
+              <th className="border p-2 text-left">Nombre</th>
+              <th className="border p-2 text-left">Apellido</th>
+              <th className="border p-2 text-left">Correo</th>
+              <th className="border p-2 text-left">Rol</th>
+              <th className="border p-2 text-center">Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {users.map(user => (
+              <tr key={user.id} className="hover:bg-blue-100">
+                <td className="border p-2">{user.nombre}</td>
+                <td className="border p-2">{user.apellido}</td>
+                <td className="border p-2">{user.email}</td>
+                <td className="border p-2">{user.role}</td>
+                <td className="border p-2 text-center">
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                    <button
+                      onClick={() => editarUsuario(user)}
+                      className="bg-green-600 text-white px-2 py-1 rounded"
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      onClick={() => eliminarUsuario(user.id)}
+                      className="bg-red-600 text-white px-2 py-1 rounded"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
     </div>
   );
