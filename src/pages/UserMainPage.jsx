@@ -81,14 +81,13 @@ function UserMainPage() {
         <div className="p-8 ">
             <AddEgresos />
             <ListadoEgresos egresos={egresos} onEditar={manejarEditar} />
-            <PresupuestoCategoria egresos={egresos} />
         </div>
 
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center">
             <button
                 type="button"
                 onClick={function(){setMostrarGrafico(true)}}
-                className="mb-10 px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-black">
+                className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-black">
                 Ver gráfico de egresos
             </button>
         </div>
@@ -98,6 +97,10 @@ function UserMainPage() {
             <FiltrarGraficoEgreso egresos={egresos} cerrar={function() {setMostrarGrafico(false)}}/>
           </div>
         )}
+
+        <div className="p-8">
+            <PresupuestoCategoria egresos={egresos} />
+        </div>
 
         {egresoEnEdicion && (
           <FormularioEditarEgreso 
