@@ -87,7 +87,7 @@ function UserMainPage() {
         <div className="flex justify-center mt-6">
             <button
                 type="button"
-                onClick={() => setMostrarGrafico(true)}
+                onClick={function(){setMostrarGrafico(true)}}
                 className="mb-10 px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-black">
                 Ver gráfico de egresos
             </button>
@@ -95,7 +95,7 @@ function UserMainPage() {
 
         {mostrarGrafico && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-            <FiltrarGraficoEgreso egresos={egresos} cerrar={() => setMostrarGrafico(false)}/>
+            <FiltrarGraficoEgreso egresos={egresos} cerrar={function() {setMostrarGrafico(false)}}/>
           </div>
         )}
 
