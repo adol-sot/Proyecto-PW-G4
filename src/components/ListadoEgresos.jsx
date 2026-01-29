@@ -1,13 +1,15 @@
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable';
+import { useState } from 'react';
 
-function ListadoEgresos({ egresos }) {
+function ListadoEgresos({ egresos, onEditar }) {
+    
     
     
     const egresosOrdenados = [...egresos].sort((a, b) => {
         return new Date(b.fecha) - new Date(a.fecha);
     });
-
+   
    const exportarPDF = () => {
         const doc = new jsPDF();
         const fecha = new Date().toLocaleDateString();
@@ -27,7 +29,7 @@ function ListadoEgresos({ egresos }) {
                 egreso.descripcion,
                 egreso.categoria,
                 
-                `S/.${Number(egreso.monto || 0).toFixed(2)}`
+                `S/${Number(egreso.monto || 0).toFixed(2)}`
             ]),
             startY: 35,
             theme: 'grid',
@@ -48,10 +50,12 @@ function ListadoEgresos({ egresos }) {
         
         doc.setFontSize(11);
         doc.setFont(undefined, 'bold'); 
-        doc.text(`Total: S/.${total.toFixed(2)}`, 14, finalY + 10);
+        doc.text(`Total: S/${total.toFixed(2)}`, 14, finalY + 10);
+        doc.addImage('public/imagenes/Palisade_Logo2.jpeg', 'JPEG', 150, finalY + 5, 25, 10);
 
         doc.save('egresos.pdf');
     };
+    
 
     return (
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
@@ -85,7 +89,7 @@ function ListadoEgresos({ egresos }) {
                                 
                                 <tr 
                                     key={index} 
-                                    className="border-t border-gray-100 hover:bg-amber-100 transition duration-150 text-gray-800"
+                                    className="border-t border-gray-100 hover:bg-amber-50 transition duration-150 text-gray-800"
                                 >
                                     <td className="p-3">{egreso.fecha}</td>
                                     <td className="p-3">{egreso.descripcion}</td>
@@ -94,8 +98,16 @@ function ListadoEgresos({ egresos }) {
                                             {egreso.categoria}
                                         </span>
                                     </td>
-                                    <td className="p-3 text-right text-red-600 font-bold">
-                                        S/.{Number(egreso.monto).toFixed(2)}
+                                    <td className="p-3 text-right text-red-600 font-bold font-mono">
+                                        ${Number(egreso.monto).toFixed(2)}
+                                    </td>
+                                    <td className="p-3 text-center">
+                                        <button
+                                            onClick={() => onEditar && onEditar(egreso)}
+                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition duration-200"
+                                        >
+                                            Editar
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
