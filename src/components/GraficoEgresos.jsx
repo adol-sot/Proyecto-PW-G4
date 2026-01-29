@@ -39,9 +39,9 @@ function GraficoEgresos({ egresos = [], tipo }){
     const valores = etiquetas.map(function (etiqueta) {
         return egresos.filter(function (e) {
             if (tipo == "categoria") {
-                return e.categoria === etiqueta
+                return e.categoria == etiqueta
             }else{
-                return obtenerMes(e.fecha) === etiqueta
+                return obtenerMes(e.fecha) == etiqueta
             }
         }).reduce(function (sum, e) {
                 return sum + e.monto
