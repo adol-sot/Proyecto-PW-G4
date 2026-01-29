@@ -14,12 +14,12 @@ function DetallesCuentaUser() {
             <p className="rounded-md px-2 py-1 text-sm text-center">user@abc</p>
         </div>
 
-        <div className="mt-2">
+        <form className="mt-2">
             <button className="mt-4 bg-yellow-300 w-full rounded-full p-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button"
                 onClick={function(){navigate("/usercambiarcontra")}}>
                 Cambiar Contraseña
             </button>
-        </div>
+        </form>
     </div>
 }
 
