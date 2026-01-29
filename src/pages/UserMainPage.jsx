@@ -3,6 +3,7 @@ import ListadoEgresos from "../components/ListadoEgresos"
 import Navegacion from "../components/Navegacion"
 import PresupuestoCategoria from "../components/PresupuestoCategoria";
 import FiltrarGraficoEgreso from "./FiltrarGraficoEgreso";
+import FormularioEditarEgreso from "../components/FormularioEditarEgreso";
 
 /*
 const listaEgresos = [
@@ -85,38 +86,64 @@ const listaEgresos = [
   ];
 
 function UserMainPage() {
-
     const [mostrarGrafico, setMostrarGrafico] = useState(false);
+    const [egresos, setEgresos] = useState(listaEgresos);
+    const [egresoEnEdicion, setEgresoEnEdicion] = useState(null);
 
-    function abrirGrafico() {
-      setMostrarGrafico(true)
-    }
+    const manejarEditar = (egreso) => {
+      setEgresoEnEdicion(egreso);
+    };
 
-    function cerrarGrafico() {
-      setMostrarGrafico(false)
-    }
+    const EditarGuardar = (formData) => {
+      const egresosActualizados = egresos.map(egreso => 
+        egreso === egresoEnEdicion 
+          ? {
+              ...egreso,
+              fecha: formData.fecha,
+              descripcion: formData.descripcion,
+              categoria: formData.categoria,
+              monto: Number(formData.monto)
+            }
+          : egreso
+      );
 
-      return <div className="min-h-screen bg-blue-900 relative">
+      setEgresos(egresosActualizados);
+      setEgresoEnEdicion(null);
+    };
+
+    const EditarCancelar = () => {
+      setEgresoEnEdicion(null);
+    };
+
+    return <div className="min-h-screen bg-blue-900 relative">
         <Navegacion />
         <div className="p-8">
-            <ListadoEgresos egresos={listaEgresos} />
-            <PresupuestoCategoria egresos={listaEgresos} />
+            <ListadoEgresos egresos={egresos} onEditar={manejarEditar} />
+            <PresupuestoCategoria egresos={egresos} />
         </div>
 
         <div className="flex justify-center mt-6">
             <button
                 type="button"
-                onClick={abrirGrafico}
+                onClick={() => setMostrarGrafico(true)}
                 className="mb-10 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Ver gráfico de egresos
             </button>
         </div>
 
-        {mostrarGrafico ? (
+        {mostrarGrafico && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-            <FiltrarGraficoEgreso egresos={listaEgresos} cerrar={function(){setMostrarGrafico(false)}}/>
+            <FiltrarGraficoEgreso egresos={egresos} cerrar={() => setMostrarGrafico(false)}/>
           </div>
-        ): null}
+        )}
+
+        {egresoEnEdicion && (
+          <FormularioEditarEgreso 
+            egreso={egresoEnEdicion} 
+            onGuardar={EditarGuardar} 
+            onCancelar={EditarCancelar}
+          />
+        )}
     </div>
 }
 
