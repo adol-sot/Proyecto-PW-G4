@@ -19,7 +19,7 @@ function PresupuestoCategoria({ egresos }) {
   const diferencia = presupuesto - totalGastos;
 
   return (
-    <div className="grid items-center place-self-center bg-white shadow rounded p-4 mt-8 ml-10">
+    <div className="grid items-center place-self-center bg-white shadow rounded-xl p-4 mt-3 ml-10">
 
       <h2 className="text-lg font-bold mb-4 text-center">
         Presupuesto mensual por categoría

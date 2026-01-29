@@ -80,16 +80,7 @@ function UserMainPage() {
         <Navegacion />
         <div className="p-8 ">
             <AddEgresos />
-            <ListadoEgresos egresos={egresos} onEditar={manejarEditar} />
-        </div>
-
-        <div className="flex justify-center">
-            <button
-                type="button"
-                onClick={function(){setMostrarGrafico(true)}}
-                className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-black">
-                Ver gráfico de egresos
-            </button>
+            <ListadoEgresos egresos={egresos} onEditar={manejarEditar} abrir={function(){setMostrarGrafico(true)}}/>
         </div>
 
         {mostrarGrafico && (
