@@ -7,8 +7,8 @@ function ListadoEgresos({ egresos, onEditar, abrir }) {
     const navigate = useNavigate()
 
     const egresosOrdenados = [...egresos].sort((a, b) => {
-        return new Date(b.fecha) - new Date(a.fecha);
-    });
+        return new Date(b.fecha) - new Date(a.fecha)
+    })
 
     const exportarPDF = () => {
         const doc = new jsPDF();
@@ -57,81 +57,74 @@ function ListadoEgresos({ egresos, onEditar, abrir }) {
     };
 
 
-    return (
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-semibold">Mis egresos</h2>
-                <div className="flex gap-6">
-                    <button 
-                        onClick={function(){navigate("/gastos-atipicos")}}
-                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-200">
-                        Ver gastos atipicos
-                    </button>
-                    <button
-                        onClick={exportarPDF}
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
-                        Exportar a PDF
+    return <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
+        <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold">Mis egresos</h2>
+            <div className="flex gap-6">
+                <button
+                    onClick={function () { navigate("/gastos-atipicos") }}
+                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                    Ver gastos atipicos
+                </button>
+                <button
+                    onClick={exportarPDF}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                    Exportar a PDF
+                </button>
+            </div>
+        </div>
+
+        {egresosOrdenados.length === 0 ? (
+            <p className="text-center py-6 text-gray-500">
+                No hay egresos registrados
+            </p>
+        ) : (
+            <div className="overflow-x-auto">
+                <table className="w-full">
+                    <thead>
+                        <tr className="bg-gray-200 text-left text-sm uppercase text-gray-700">
+                            <th className="p-3">Fecha</th>
+                            <th className="p-3">Descripción</th>
+                            <th className="p-3">Categoría</th>
+                            <th className="p-3 text-right">Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {egresosOrdenados.map((egreso, index) => (
+
+                            <tr key={index}
+                                className="border-t border-gray-100 hover:bg-amber-50 transition duration-150 text-gray-800">
+                                <td className="p-3">{egreso.fecha}</td>
+                                <td className="p-3">{egreso.descripcion}</td>
+                                <td className="p-3">
+                                    <span className="px-2 py-1 rounded-full bg-gray-100 text-xs font-medium text-gray-600">
+                                        {egreso.categoria}
+                                    </span>
+                                </td>
+                                <td className="p-3 text-right text-red-600 font-bold">
+                                    S/.{Number(egreso.monto).toFixed(2)}
+                                </td>
+                                <td className="p-3 text-center">
+                                    <button onClick={() => onEditar && onEditar(egreso)}
+                                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition duration-200">
+                                        Editar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <div className="flex justify-center mt-4">
+                    <button type="button"
+                        onClick={abrir}
+                        className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-amber-600">
+                        Ver gráfico de egresos
                     </button>
                 </div>
             </div>
 
-            {egresosOrdenados.length === 0 ? (
-                <p className="text-center py-6 text-gray-500">
-                    No hay egresos registrados
-                </p>
-            ) : (
-                <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                        <thead>
-                            <tr className="bg-gray-200 text-left text-sm uppercase text-gray-700">
-                                <th className="p-3 rounded-tl-lg">Fecha</th>
-                                <th className="p-3">Descripción</th>
-                                <th className="p-3">Categoría</th>
-                                <th className="p-3 text-right rounded-tr-lg">Monto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {egresosOrdenados.map((egreso, index) => (
-
-                                <tr
-                                    key={index}
-                                    className="border-t border-gray-100 hover:bg-amber-50 transition duration-150 text-gray-800"
-                                >
-                                    <td className="p-3">{egreso.fecha}</td>
-                                    <td className="p-3">{egreso.descripcion}</td>
-                                    <td className="p-3">
-                                        <span className="px-2 py-1 rounded-full bg-gray-100 text-xs font-medium text-gray-600">
-                                            {egreso.categoria}
-                                        </span>
-                                    </td>
-                                    <td className="p-3 text-right text-red-600 font-bold">
-                                        S/.{Number(egreso.monto).toFixed(2)}
-                                    </td>
-                                    <td className="p-3 text-center">
-                                        <button
-                                            onClick={() => onEditar && onEditar(egreso)}
-                                            className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition duration-200"
-                                        >
-                                            Editar
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <div className="flex justify-center mt-4">
-                        <button
-                            type="button"
-                            onClick={abrir}
-                            className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-black">
-                            Ver gráfico de egresos
-                        </button>
-                    </div>
-                </div>
-
-            )}
-        </div>
-    );
+        )}
+    </div>
 }
 
 export default ListadoEgresos;

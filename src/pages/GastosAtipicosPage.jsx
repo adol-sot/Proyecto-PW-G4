@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom"
 function GastosAtipicosPage() {
     const navigate = useNavigate()
 
-    return <div className="bg-blue-900">
-    <div className="max-w-5xl mx-auto p-6 min-h-screen">
-        <div className="text-yellow-400 flex justify-between items-center">
+    return <div className="bg-blue-900 min-h-screen">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
+        <div className="text-yellow-400 flex flex-col md:flex-row md:justify-between md:items-center mb-8">
             <div>
                 <h1 className="text-4xl font-bold mb-2">
                     Gastos Atípicos
