@@ -15,7 +15,7 @@ function DetallesCuentaUser() {
         </div>
 
         <div className="mt-2">
-            <button className="mt-4 bg-yellow-300 w-full rounded-full py-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button"
+            <button className="mt-4 bg-yellow-300 w-full rounded-full p-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button"
                 onClick={function(){navigate("/usercambiarcontra")}}>
                 Cambiar Contraseña
             </button>
