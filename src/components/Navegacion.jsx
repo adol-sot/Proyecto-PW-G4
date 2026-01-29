@@ -19,7 +19,10 @@ function Navegacion() {
 
     return <nav className="bg-blue-500 shadow-lg py-4">
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-            <img className="h-12 rounded-xl" src="/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+            <div className="xs:visible ">
+                <img className="h-12 rounded-xl" src="/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+            </div>
+            
             <div className="flex items-center gap-4">
                 {esAdmin && (
                     <Link to="/adminmain" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
