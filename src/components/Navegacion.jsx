@@ -27,11 +27,6 @@ function Navegacion() {
                     </Link>
                 )}
                 {!esAdmin &&
-                <Link to="/usermainseguridad" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
-                    Seguridad
-                </Link>
-                }
-                {!esAdmin &&
                 <Link to="/usermain" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
                     Egresos
                 </Link>
@@ -39,6 +34,11 @@ function Navegacion() {
                 {!esAdmin &&
                 <Link to="/usermainfiltros" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
                     Filtros
+                </Link>
+                }
+                {!esAdmin &&
+                <Link to="/usermainseguridad" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Cuenta
                 </Link>
                 }
                 <Link to="/" onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-full font-medium hover:bg-red-600">

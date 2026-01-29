@@ -11,6 +11,7 @@ import AdminMainPage from './pages/AdminMainPage'
 import Navegacion from './components/Navegacion'
 import FiltrarGraficoEgreso from './pages/FiltrarGraficoEgreso'
 import UserMainPageSeguridad from './pages/UserMainPageSeguridad'
+import UserCambiarContra from './pages/UserCambiarContra'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/adminmain' element={ <AdminMainPage />}/>
         <Route path='/grafico-egresos' element={ <FiltrarGraficoEgreso />}/>
         <Route path='/usermainseguridad' element={ <UserMainPageSeguridad />}/>
+        <Route path='/usercambiarcontra' element={ <UserCambiarContra/>}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
