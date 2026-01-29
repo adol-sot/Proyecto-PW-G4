@@ -94,7 +94,7 @@ function UserMainPageFiltros() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">22 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-pink-100 text-pink-800">
@@ -104,7 +104,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Streaming</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$95.00</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">21 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">
@@ -114,7 +114,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Farmacia</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$180.00</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">20 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
@@ -124,7 +124,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Gasolina</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$120.00</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">19 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
@@ -134,7 +134,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Luz y agua</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$350.00</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">18 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
@@ -144,7 +144,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Restaurante</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$75.00</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">17 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-pink-100 text-pink-800">
@@ -154,7 +154,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Cine</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$200.00</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">16 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
@@ -164,7 +164,7 @@ function UserMainPageFiltros() {
                                     <td className="p-3">Uber</td>
                                     <td className="p-3 font-bold text-red-600 text-lg">$45.50</td>
                                 </tr>
-                                <tr className="border-t hover:bg-amber-600 hover:text-white">
+                                <tr className="border-t hover:bg-amber-100">
                                     <td className="p-3">15 de enero de 2025</td>
                                     <td className="p-3">
                                         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">

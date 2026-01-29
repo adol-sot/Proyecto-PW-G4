@@ -19,9 +19,9 @@ function PresupuestoCategoria({ egresos }) {
   const diferencia = presupuesto - totalGastos;
 
   return (
-    <div className="bg-white shadow rounded p-4 mt-8 ml-10">
+    <div className="grid items-center place-self-center bg-white shadow rounded p-4 mt-8 ml-10">
 
-      <h2 className="text-lg font-bold mb-4">
+      <h2 className="text-lg font-bold mb-4 text-center">
         Presupuesto mensual por categoría
       </h2>
 
@@ -46,10 +46,10 @@ function PresupuestoCategoria({ egresos }) {
         className="border p-2 rounded-xl w-2xl mb-4 ml-5"
       />
 
-      <p>Total gastado: <strong>S/ {totalGastos}</strong></p>
+      <p className="text-center" >Total gastado: <strong>S/ {totalGastos}</strong></p>
 
       <p
-        className={`mt-2 font-bold ${
+        className={`mt-2 font-bold text-center ${
           diferencia >= 0 ? "text-green-600" : "text-red-600"
         }`}
       >
