@@ -8,10 +8,11 @@ function UserCambiarContra(){
         <div className="rounded-4xl shadow-md p-10 bg-white xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2">
             <h1 className="text-4xl font-bold place-self-center mb-6"> Cambiar Contraseña </h1  >
             <div>
-                <p className="my-6">Ingresa tu correo electrónico y tu nueva contraseña. Una vez completado te enviaremos un correo para confirmar la acción.</p>
+                <p className="my-6">Ingresa tu contraseña actual y tu nueva contraseña. Una vez completado te enviaremos un correo para confirmar la acción.</p>
                 <div className="grid">
                     <label className="text-sm font-medium mb-1">Contraseña actual</label>
                     <input type="password" className="rounded-full bg-gray-200 px-4 py-1"/>
+                    <p className="text-sm mt-1 text-blue-900 hover:text-amber-600"> ¿Olvidaste tu contraseña? </p>
 
                     <label className="text-sm font-medium mb-1 mt-5">Nueva contraseña</label>
                     <input type="password" className="rounded-full bg-gray-200 px-4 py-1"/>
