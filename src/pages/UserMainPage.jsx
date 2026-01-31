@@ -47,6 +47,8 @@ const listaEgresos = [
   ];
 
 function UserMainPage() {
+    const [mostrarAddEgreso, setMostrarAddEgreso] = useState(false);
+
     const [mostrarGrafico, setMostrarGrafico] = useState(false);
     const [egresos, setEgresos] = useState(listaEgresos);
     const [egresoEnEdicion, setEgresoEnEdicion] = useState(null);
@@ -78,14 +80,20 @@ function UserMainPage() {
 
     return <div className="min-h-screen bg-blue-900 relative">
         <Navegacion />
+
         <div className="p-8 ">
-            <AddEgresos />
-            <ListadoEgresos egresos={egresos} onEditar={manejarEditar} abrir={function(){setMostrarGrafico(true)}}/>
+            <ListadoEgresos egresos={egresos} onEditar={manejarEditar} abrir={function(){setMostrarGrafico(true)}} abrirAddEgresos={function(){setMostrarAddEgreso(true)}}/>
         </div>
 
         {mostrarGrafico && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
             <FiltrarGraficoEgreso egresos={egresos} cerrar={function() {setMostrarGrafico(false)}}/>
+          </div>
+        )}
+
+        {mostrarAddEgreso && (
+          <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+            <AddEgresos cerrarAddEgreso={function(){setMostrarAddEgreso(false)}}/>
           </div>
         )}
 

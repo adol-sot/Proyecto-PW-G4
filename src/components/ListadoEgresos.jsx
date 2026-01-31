@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable';
 import { useNavigate } from 'react-router-dom';
 
-function ListadoEgresos({ egresos, onEditar, abrir }) {
+function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
 
     const navigate = useNavigate()
 
@@ -61,6 +61,11 @@ function ListadoEgresos({ egresos, onEditar, abrir }) {
         <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-semibold">Mis egresos</h2>
             <div className="flex gap-6">
+                <button
+                    onClick={abrirAddEgresos}
+                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                    +
+                </button>
                 <button
                     onClick={function () { navigate("/gastos-atipicos") }}
                     className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-200">

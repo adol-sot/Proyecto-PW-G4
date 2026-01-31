@@ -1,5 +1,9 @@
-function AddEgresos() {
-    return <div className="border-2 rounded-4xl border-gray-300 shadow-md p-5 my-5 bg-white xl:w-2/3 lg:w-2/3 md:w-2/3 sm:w-4/5 mx-auto">
+function AddEgresos({ cerrarAddEgreso }) {
+    return <div className="relative bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+        <button onClick={cerrarAddEgreso} className="absolute top-3 right-3 text-gray-500 hover:text-black" type="button">
+            X
+        </button>
+        
         <h2 className="text-2xl font-bold text-center">Registrar Egreso</h2>
         <hr className="my-5"></hr>
         <form className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-1 xs:grid-cols-1 gap-y-2 text-center">
