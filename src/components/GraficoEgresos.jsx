@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -7,7 +6,7 @@ import {
   Legend
 } from "chart.js";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 function GraficoEgresos({ egresos = [], tipo }){
     function obtenerMes(fecha){
@@ -15,39 +14,39 @@ function GraficoEgresos({ egresos = [], tipo }){
         "Enero", "Febrero", "Marzo", "Abril",
         "Mayo", "Junio", "Julio", "Agosto",
         "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        ];
+        ]
 
-        const numeroMes = new Date(fecha).getMonth();
-        return meses[numeroMes];
+        const numeroMes = new Date(fecha).getMonth()
+        return meses[numeroMes]
     }
 
-    let etiquetas = [];
+    let etiquetas = []
 
-    if (tipo === "categoria") {
+    if (tipo == "categoria") {
         etiquetas = Array.from(new Set(egresos.map(function (e) {
-                    return e.categoria;
+                    return e.categoria
                 })
             )
-        );
+        )
     }else{
         etiquetas = Array.from(new Set(egresos.map(function (e) {
-                    return obtenerMes(e.fecha);
+                    return obtenerMes(e.fecha)
                 })
             )
-        );
+        )
     }
 
     const valores = etiquetas.map(function (etiqueta) {
         return egresos.filter(function (e) {
-            if (tipo === "categoria") {
-                return e.categoria === etiqueta;
+            if (tipo == "categoria") {
+                return e.categoria == etiqueta
             }else{
-                return obtenerMes(e.fecha) === etiqueta;
+                return obtenerMes(e.fecha) == etiqueta
             }
         }).reduce(function (sum, e) {
-                return sum + e.monto;
-            }, 0);
-    });
+                return sum + e.monto
+            }, 0)
+    })
 
     const data = {
         labels: etiquetas,
@@ -61,10 +60,10 @@ function GraficoEgresos({ egresos = [], tipo }){
                     "#EF4444",
                     "#06B6D4",
                     "#A855F7",
-                ],
-            },
-        ],
-    };
+                ]
+            }
+        ]
+    }
 
     return <div className="flex justify-center">
         <div className="w-72">
