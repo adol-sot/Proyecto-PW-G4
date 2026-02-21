@@ -1,10 +1,33 @@
+
 import { useNavigate, Link } from "react-router-dom"
+import { useState } from "react"
+import api from "../api/axios"
+
 
 function RegisterPage() {
     const navigate = useNavigate()
+    const [nombre, setNombre] = useState("")
+    const [correo, setCorreo] = useState("")
+    const [contrasena, setContrasena] = useState("")
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
 
-    function handleClick() {
-        navigate("/")
+    async function handleRegister(e) {
+        e.preventDefault()
+        setError("")
+        setSuccess("")
+        try {
+            const response = await api.post("/auth/register", {
+                full_name: nombre,
+                email: correo,
+                password: contrasena,
+                role: "user"
+            })
+            setSuccess("Registro exitoso. Ahora puedes iniciar sesión.")
+            setTimeout(() => navigate("/"), 1500)
+        } catch (err) {
+            setError(err.response?.data?.detail || "Error al registrar usuario")
+        }
     }
 
     return <div className="flex justify-center bg-blue-900 shadow-lg min-h-screen">
@@ -15,12 +38,15 @@ function RegisterPage() {
                 <h2 className="text-2xl mt-3">Regístrate para comenzar</h2>
             </div>
 
-            <form className="mt-6 px-10">
+            <form className="mt-6 px-10" onSubmit={handleRegister}>
                 <div className="grid grid-cols-1">
                     <label className="ml-1">Nombre Completo</label>
                     <input 
                         className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm" 
-                        type="text" 
+                        type="text"
+                        value={nombre}
+                        onChange={e => setNombre(e.target.value)}
+                        required
                     />
                 </div>
 
@@ -28,7 +54,10 @@ function RegisterPage() {
                     <label className="ml-1">Correo</label>
                     <input 
                         className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm" 
-                        type="text" 
+                        type="email"
+                        value={correo}
+                        onChange={e => setCorreo(e.target.value)}
+                        required
                     />
                 </div>
 
@@ -36,15 +65,20 @@ function RegisterPage() {
                     <label className="ml-1">Contraseña</label>
                     <input 
                         className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm" 
-                        type="password" 
+                        type="password"
+                        value={contrasena}
+                        onChange={e => setContrasena(e.target.value)}
+                        required
                     />
                 </div>
+
+                {error && <div className="mt-4 text-red-600 text-center">{error}</div>}
+                {success && <div className="mt-4 text-green-600 text-center">{success}</div>}
 
                 <div className="mt-4">
                     <button 
                         className="mt-4 bg-yellow-300 w-full rounded-full py-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" 
-                        type="button"
-                        onClick={handleClick}
+                        type="submit"
                     >
                         Registrarse
                     </button>
