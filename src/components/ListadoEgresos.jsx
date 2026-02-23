@@ -3,6 +3,8 @@ import autoTable from 'jspdf-autotable';
 import { useNavigate } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
 import { useRef } from 'react';
+import React from "react";
+
 
 function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
 

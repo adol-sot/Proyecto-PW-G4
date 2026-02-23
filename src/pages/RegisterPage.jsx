@@ -6,11 +6,12 @@ import api from "../api/axios"
 
 function RegisterPage() {
     const navigate = useNavigate()
-    const [nombre, setNombre] = useState("")
-    const [correo, setCorreo] = useState("")
-    const [contrasena, setContrasena] = useState("")
-    const [error, setError] = useState("")
-    const [success, setSuccess] = useState("")
+    const [nombre, setNombre] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [contrasena, setContrasena] = useState("");
+    const [rol, setRol] = useState("user");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     async function handleRegister(e) {
         e.preventDefault()
@@ -21,7 +22,7 @@ function RegisterPage() {
                 full_name: nombre,
                 email: correo,
                 password: contrasena,
-                role: "user"
+                role: rol
             })
             setSuccess("Registro exitoso. Ahora puedes iniciar sesión.")
             setTimeout(() => navigate("/"), 1500)
@@ -70,6 +71,19 @@ function RegisterPage() {
                         onChange={e => setContrasena(e.target.value)}
                         required
                     />
+                </div>
+
+                <div className="grid grid-cols-1 mt-4">
+                    <label className="ml-1">Rol</label>
+                    <select 
+                        className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm"
+                        value={rol}
+                        onChange={e => setRol(e.target.value)}
+                        required
+                    >
+                        <option value="user">Usuario</option>
+                        <option value="admin">Administrador</option>
+                    </select>
                 </div>
 
                 {error && <div className="mt-4 text-red-600 text-center">{error}</div>}

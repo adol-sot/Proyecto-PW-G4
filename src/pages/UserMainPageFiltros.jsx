@@ -18,7 +18,19 @@ function UserMainPageFiltros() {
         async function init() {
             try {
                 const resCat = await api.get("/categories", { params: { limit: 200 } })
-                setCategories(resCat.data || [])
+                const payload = resCat?.data
+                const candidates = [
+                    payload,
+                    payload?.data,
+                    payload?.data?.data,
+                    payload?.data?.results,
+                    payload?.data?.items,
+                    payload?.results,
+                    payload?.items,
+                    payload?.categories,
+                ]
+                const normalized = candidates.find(Array.isArray) || []
+                setCategories(normalized)
             } catch (err) {
                 // no-op visual; mantenemos filtros aunque no carguen categorías
             }
@@ -39,7 +51,22 @@ function UserMainPageFiltros() {
             if (amountMax) params.amount_max = parseFloat(amountMax)
 
             const res = await api.get("/expenses", { params })
-            setExpenses(res.data || [])
+            const payload = res?.data
+            const candidates = [
+                payload,
+                payload?.data,
+                payload?.data?.expenses,
+                payload?.data?.data,
+                payload?.data?.results,
+                payload?.data?.items,
+                payload?.data?.data?.expenses,
+                payload?.data?.data?.items,
+                payload?.results,
+                payload?.items,
+                payload?.expenses,
+            ]
+            const normalized = candidates.find(Array.isArray) || []
+            setExpenses(normalized)
         } catch (err) {
             setError(err.response?.data?.detail || "No se pudieron cargar los egresos")
         } finally {
@@ -81,7 +108,10 @@ function UserMainPageFiltros() {
                                 >
                                     <option value="">Todas las categorías</option>
                                     {categories.map(cat => (
-                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        <option key={cat.id ?? cat.uuid ?? cat._id ?? cat.codigo}
+                                            value={cat.id ?? cat.uuid ?? cat._id ?? cat.codigo}>
+                                            {cat.name ?? cat.nombre ?? cat.title ?? "(sin nombre)"}
+                                        </option>
                                     ))}
                                 </select>
                             </div>
@@ -173,8 +203,13 @@ function UserMainPageFiltros() {
                                 </thead>
                                 <tbody>
                                     {expenses.map(exp => {
-                                        const categoryName = categories.find(c => c.id === exp.category_id)?.name || "-"
-                                        const dateStr = new Date(exp.expense_date).toLocaleDateString()
+                                        const expCategoryId = String(exp.category_id ?? exp.categoryId ?? exp.categoria_id ?? exp.categoriaId ?? "")
+                                        const categoryName = (categories.find(c => String(c.id ?? c.uuid ?? c._id ?? c.codigo) === expCategoryId)?.name ??
+                                            categories.find(c => String(c.id ?? c.uuid ?? c._id ?? c.codigo) === expCategoryId)?.nombre)
+                                            || "-"
+                                        const rawDate = exp.expense_date || exp.fecha || exp.date
+                                        const dateStr = rawDate ? new Date(rawDate).toLocaleDateString() : "-"
+                                        const amount = exp.amount ?? exp.monto ?? exp.valor ?? 0
                                         return (
                                             <tr key={exp.id} className="border-t hover:bg-amber-100">
                                                 <td className="p-3">{dateStr}</td>
@@ -184,7 +219,7 @@ function UserMainPageFiltros() {
                                                     </span>
                                                 </td>
                                                 <td className="p-3">{exp.description || "(sin descripción)"}</td>
-                                                <td className="p-3 font-bold text-red-600 text-lg">S/.{exp.amount?.toFixed(2)}</td>
+                                                <td className="p-3 font-bold text-red-600 text-lg">S/.{Number(amount).toFixed(2)}</td>
                                             </tr>
                                         )
                                     })}

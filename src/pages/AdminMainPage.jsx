@@ -25,9 +25,22 @@ function AdminMainPage() {
     }, [])
 
     const chartData = useMemo(() => {
-        const entries = Object.entries(stats.users_by_month || {})
-        return entries.map(([ym, count]) => ({ ym, count }))
-    }, [stats.users_by_month])
+        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        const year = new Date().getFullYear();
+        // Construir array de todos los meses del año actual
+        const months = Array.from({ length: 12 }, (_, i) => {
+            const ym = `${year}-${String(i + 1).padStart(2, '0')}`;
+            const count = stats.users_by_month?.[ym] || 0;
+            return {
+                ym,
+                count,
+                year,
+                month: String(i + 1).padStart(2, '0'),
+                monthName: monthNames[i]
+            };
+        });
+        return months;
+    }, [stats.users_by_month]);
 
     const monthlyAverage = useMemo(() => {
         if (!chartData.length) return 0
@@ -81,16 +94,23 @@ function AdminMainPage() {
                                 <div className="flex items-end gap-3 overflow-x-auto" style={{height: '260px', paddingBottom: '30px'}}>
                                     {chartData.length === 0 && <div className="text-gray-500">Sin datos</div>}
                                     {chartData.map(item => {
-                                        const height = Math.max(20, Math.min(200, item.count * 30))
-                                        const [year, month] = item.ym.split('-')
+                                        const height = Math.max(20, Math.min(180, item.count * 30));
                                         return (
-                                            <div key={item.ym} className="flex flex-col items-center justify-end flex-none" style={{width: '70px'}}>
-                                                <div className="w-full bg-yellow-300 rounded-t-lg mb-2 shadow-md hover:bg-amber-400 transition-colors" style={{height}}></div>
-                                                <span className="text-sm text-gray-700 font-semibold">{month}</span>
-                                                <span className="text-xs text-gray-500 mt-1">{item.count}</span>
-                                                <span className="text-[10px] text-gray-400">{year}</span>
+                                            <div key={item.ym} className="flex flex-col items-center justify-end flex-none group" style={{width: '70px', position: 'relative'}}>
+                                                <div 
+                                                    className={`w-full mb-2 shadow-md transition-colors cursor-pointer rounded-lg ${item.count > 0 ? 'bg-yellow-400 hover:bg-amber-500' : 'bg-gray-300'}`}
+                                                    style={{height, minHeight: 20, borderRadius: '8px', border: item.count > 0 ? '2px solid #bfa600' : '1px solid #bbb'}}
+                                                >
+                                                    {/* Tooltip */}
+                                                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10" style={{whiteSpace: 'nowrap'}}>
+                                                        {item.count} usuarios en {item.monthName}
+                                                    </div>
+                                                </div>
+                                                <span className="text-sm text-gray-700 font-semibold">{item.monthName}</span>
+                                                <span className="text-xs text-gray-500 mt-1">{item.count} usuarios</span>
+                                                <span className="text-[10px] text-gray-400">{item.year}</span>
                                             </div>
-                                        )
+                                        );
                                     })}
                                 </div>
                             </div>

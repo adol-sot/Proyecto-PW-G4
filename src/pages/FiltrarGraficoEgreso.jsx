@@ -1,6 +1,5 @@
-import GraficoEgresos from "../components/GraficoEgresos"
+import GraficoEgresos from "../components/GraficoEgresos";
 import { useState } from "react";
-
 function FiltrarGraficoEgreso({ egresos, cerrar }) {
 
     const [tipoGrafico, setTipoGrafico] = useState("categoria");
