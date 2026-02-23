@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
-function CuerpoCambiarContra() {
+function CuerpoPeticionRecuperacion() {
     const navigate = useNavigate()
 
     const [correo, setCorreo] = useState("")
@@ -23,7 +23,7 @@ function CuerpoCambiarContra() {
             const data = await response.json()
 
             if (response.ok) {
-                setMensajeModal("Se envió el enlace de recuperación correctamente.")
+                setMensajeModal("Se envió el enlace de recuperación correctamente. Tendrá 15 minutos para cambiar su contraseña.")
                 setEsError(false)
             } else if (response.status === 404) {
                 // Usuario no encontrado
@@ -90,4 +90,4 @@ function CuerpoCambiarContra() {
     </div>
 }
 
-export default CuerpoCambiarContra
+export default CuerpoPeticionRecuperacion
