@@ -18,7 +18,7 @@ function Navegacion() {
         const response = await fetch(`http://localhost:8000/logout`, {
             method: "DELETE",
             body : JSON.stringify({
-                token_acceso : token,
+                token : token,
             }),
             headers: {
                 "content-type" : "application/json"
