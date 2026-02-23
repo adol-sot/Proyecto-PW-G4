@@ -71,7 +71,7 @@ function UserMainPage() {
 
         {mostrarGrafico && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-            <FiltrarGraficoEgreso egresos={egresos} cerrar={function() {setMostrarGrafico(false)}}/>
+            <FiltrarGraficoEgreso cerrar={function() {setMostrarGrafico(false)}}/>
           </div>
         )}
 

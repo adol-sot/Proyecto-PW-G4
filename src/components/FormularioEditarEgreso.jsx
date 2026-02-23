@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { editarEgreso } from "../services/services";
+//import { editarEgreso } from "../services/services";
 
 function FormularioEditarEgreso({ egreso, egresoId, usuarioId, onGuardar, onCancelar }) {
   const [formData, setFormData] = useState({

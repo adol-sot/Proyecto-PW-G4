@@ -1,98 +1,113 @@
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 function GastosAtipicosPage() {
+
     const navigate = useNavigate()
+    const [gastos, setGastos] = useState([])
+
+    useEffect(() => {
+        async function obtenerGastosAtipicos() {
+            try {
+                const token = localStorage.getItem("TOKEN")
+                const userId = localStorage.getItem("USER_ID")
+
+                const response = await fetch(`http://localhost:8000/egresos/${userId}/atipicos`,
+                    {
+                        headers: {
+                            "x-token": token
+                        }
+                    }
+                )
+
+                const data = await response.json()
+                if (response.ok) {
+                    setGastos(data.data)
+                } else {
+                    console.error(data)
+                }
+
+            }catch (error){
+                console.error("Error:", error)
+            }
+        }
+
+        obtenerGastosAtipicos()
+    }, [])
 
     return <div className="bg-blue-900 min-h-screen">
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
-        <div className="text-yellow-400 flex flex-col md:flex-row md:justify-between md:items-center mb-8">
-            <div>
-                <h1 className="text-4xl font-bold mb-2">
-                    Gastos Atípicos
-                </h1>
-                <p className="text-xl mb-8">
-                    Detectamos gastos que sobrepasan tu comportamiento financiero habitual.
-                </p>
-            </div>
-            <button className="bg-gray-300 rounded-2xl text-black px-3 py-1 text-xl hover:bg-gray-400" 
-                    type="button" 
-                    onClick={function(){navigate("/usermain")}}>
-                Volver
-            </button>
-        </div>
-
-        <div className="bg-white rounded-xl shadow p-6 border-l-4 border-red-500 mb-5">
-            <div className="flex justify-between items-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
+            <div className="text-yellow-400 flex flex-col md:flex-row md:justify-between md:items-center mb-8">
                 <div>
-                    <p className="text-lg font-semibold">Tecnología</p>
-                    <p className="text-sm text-gray-500">15 de enero, 2026</p>
+                    <h1 className="text-4xl font-bold mb-2">
+                        Gastos Atípicos
+                    </h1>
+                    <p className="text-xl mb-8">
+                        Detectamos gastos que sobrepasan tu comportamiento financiero habitual.
+                    </p>
                 </div>
-                <p className="text-2xl font-bold text-red-600">
-                    S/ 850.00
-                </p>
-            </div>
-            <div className="flex gap-2 mt-3">
-                <span className="px-3 py-1 text-sm rounded-full bg-red-100 text-red-700">
-                    Monto inusual
-                </span>
-                <span className="px-3 py-1 text-sm rounded-full bg-orange-100 text-orange-700">
-                    Categoría poco frecuente
-                </span>
+
+                <button className="bg-gray-300 rounded-2xl text-black px-3 py-1 text-xl hover:bg-gray-400"
+                        type="button"
+                        onClick={() => navigate("/usermain")}>
+                    Volver
+                </button>
             </div>
 
-            <p className="text-sm text-gray-600 mt-3">
-                Este gasto es considerablemente mayor a tu promedio habitual
-                y pertenece a una categoría que utilizas con poca frecuencia.
-            </p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow p-6 border-l-4 border-red-500 mb-5">
-            <div className="flex justify-between items-center">
-                <div>
-                    <p className="text-lg font-semibold">Viajes</p>
-                    <p className="text-sm text-gray-500">22 de enero, 2026</p>
+            {gastos.length === 0 && (
+                <div className="bg-white rounded-xl shadow p-6 text-center">
+                    <p className="text-gray-600">
+                        No se detectaron gastos atípicos.
+                    </p>
                 </div>
-                <p className="text-2xl font-bold text-red-600">
-                    S/ 1,200.00
-                </p>
-            </div>
+            )}
 
-            <div className="flex gap-2 mt-3">
-                <span className="px-3 py-1 text-sm rounded-full bg-red-100 text-red-700">
-                    Monto inusual
-                </span>
-            </div>
+            {gastos.map((gasto) => {
+                const esMontoInusual = gasto.flags.includes("MONTO_INUSUAL")
+                const esCategoriaPocoFrecuente = gasto.flags.includes("CATEGORIA_POCO_FRECUENTE")
 
-            <p className="text-sm text-gray-600 mt-3">
-                El monto de este gasto supera ampliamente el promedio mensual
-                registrado en esta categoría.
-            </p>
-        </div>
+                const bordeColor = esMontoInusual ? "border-red-500" : "border-yellow-500"
+                const montoColor = esMontoInusual ? "text-red-600" : "text-yellow-600"
+                return (
+                    <div key={gasto.id}
+                        className={`bg-white rounded-xl shadow p-6 border-l-4 ${bordeColor} mb-5`}>
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <p className="text-lg font-semibold">
+                                    {gasto.categoria}
+                                </p>
+                                <p className="text-sm text-gray-500">
+                                    {new Date(gasto.fecha).toLocaleDateString()}
+                                </p>
+                            </div>
 
-        <div className="bg-white rounded-xl shadow p-6 border-l-4 border-yellow-500">
-            <div className="flex justify-between items-center">
-                <div>
-                    <p className="text-lg font-semibold">Mascotas</p>
-                    <p className="text-sm text-gray-500">28 de enero, 2026</p>
-                </div>
-                <p className="text-2xl font-bold text-yellow-600">
-                    S/ 180.00
-                </p>
-            </div>
+                            <p className={`text-2xl font-bold ${montoColor}`}>
+                                S/ {gasto.monto}
+                            </p>
+                        </div>
 
-            <div className="flex gap-2 mt-3">
-                <span className="px-3 py-1 text-sm rounded-full bg-yellow-100 text-yellow-700">
-                    Categoría poco frecuente
-                </span>
-            </div>
+                        <div className="flex gap-2 mt-3">
+                            {esMontoInusual && (
+                                <span className="px-3 py-1 text-sm rounded-full bg-red-100 text-red-700">
+                                    Monto inusual
+                                </span>
+                            )}
+                            {esCategoriaPocoFrecuente && (
+                                <span className="px-3 py-1 text-sm rounded-full bg-yellow-100 text-yellow-700">
+                                    Categoría poco frecuente
+                                </span>
+                            )}
 
-            <p className="text-sm text-gray-600 mt-3">
-                Este gasto pertenece a una categoría que no forma parte
-                de tus gastos habituales.
-            </p>
+                        </div>
+
+                        <p className="text-sm text-gray-600 mt-3">
+                            {gasto.mensaje}
+                        </p>
+                    </div>
+                )
+            })}
         </div>
     </div>
-</div>
 }
 
 export default GastosAtipicosPage

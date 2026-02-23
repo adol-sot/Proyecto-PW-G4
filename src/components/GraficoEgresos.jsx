@@ -1,52 +1,34 @@
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2"
 import {
   Chart as ChartJS,
   ArcElement,
   Tooltip,
   Legend
-} from "chart.js";
+} from "chart.js"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-function GraficoEgresos({ egresos = [], tipo }){
-    function obtenerMes(fecha){
-        const meses = [
-        "Enero", "Febrero", "Marzo", "Abril",
+function GraficoEgresos({ datos = [], tipo }) {
+
+    const nombresMes = [
+        "", "Enero", "Febrero", "Marzo", "Abril",
         "Mayo", "Junio", "Julio", "Agosto",
         "Septiembre", "Octubre", "Noviembre", "Diciembre"
-        ]
-
-        const numeroMes = new Date(fecha).getMonth()
-        return meses[numeroMes]
-    }
+    ]
 
     let etiquetas = []
+    let valores = []
 
-    if (tipo == "categoria") {
-        etiquetas = Array.from(new Set(egresos.map(function (e) {
-                    return e.categoria
-                })
-            )
-        )
-    }else{
-        etiquetas = Array.from(new Set(egresos.map(function (e) {
-                    return obtenerMes(e.fecha)
-                })
-            )
-        )
+    if (tipo === "categoria"){
+
+        etiquetas = datos.map(d => d.category_name)
+        valores = datos.map(d => d.total)
+
+    }else {
+
+        etiquetas = datos.map(d => nombresMes[d.mes])
+        valores = datos.map(d => d.total)
     }
-
-    const valores = etiquetas.map(function (etiqueta) {
-        return egresos.filter(function (e) {
-            if (tipo == "categoria") {
-                return e.categoria == etiqueta
-            }else{
-                return obtenerMes(e.fecha) == etiqueta
-            }
-        }).reduce(function (sum, e) {
-                return sum + e.monto
-            }, 0)
-    })
 
     const data = {
         labels: etiquetas,
@@ -66,10 +48,10 @@ function GraficoEgresos({ egresos = [], tipo }){
     }
 
     return <div className="flex justify-center">
-        <div className="w-72">
-            <Doughnut data={data} />
+            <div className="w-72">
+                <Doughnut data={data} />
+            </div>
         </div>
-    </div>
 }
 
 export default GraficoEgresos
