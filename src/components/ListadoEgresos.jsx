@@ -60,6 +60,7 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
         
     
 
+
     return <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-semibold">Mis egresos</h2>
@@ -107,15 +108,15 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
 
                             <tr key={index}
                                 className="border-t border-gray-100 hover:bg-amber-50 transition duration-150 text-gray-800">
-                                <td className="p-3">{egreso.fecha}</td>
-                                <td className="p-3">{egreso.descripcion}</td>
+                                <td className="p-3">{new Date(egreso.expense_date).toLocaleDateString()}</td>
+                                <td className="p-3">{egreso.description}</td>
                                 <td className="p-3">
                                     <span className="px-2 py-1 rounded-full bg-gray-100 text-xs font-medium text-gray-600">
-                                        {egreso.categoria}
+                                        {egreso.category}
                                     </span>
                                 </td>
                                 <td className="p-3 text-right text-red-600 font-bold">
-                                    S/.{Number(egreso.monto).toFixed(2)}
+                                    S/.{Number(egreso.amount).toFixed(2)}
                                 </td>
                                 <td className="p-3 text-center">
                                     <button onClick={() => onEditar && onEditar(egreso)}

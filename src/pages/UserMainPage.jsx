@@ -1,57 +1,41 @@
-import { useState } from "react";
-import ListadoEgresos from "../components/ListadoEgresos"
-import Navegacion from "../components/Navegacion"
+import { useState, useEffect } from "react";
+import ListadoEgresos from "../components/ListadoEgresos";
+import Navegacion from "../components/Navegacion";
 import PresupuestoCategoria from "../components/PresupuestoCategoria";
 import FiltrarGraficoEgreso from "./FiltrarGraficoEgreso";
 import FormularioEditarEgreso from "../components/FormularioEditarEgreso";
 import AddEgresos from "../components/AddEgresos";
 
-
-const listaEgresos = [
-    {
-      fecha: "2024-06-01",
-      descripcion: "Compra en supermercado",
-      categoria: "Alimentos",
-      monto: 350,
-    },
-    {
-      fecha: "2024-06-03",
-      descripcion: "Pago de servicios",
-      categoria: "Servicios",
-      monto: 120,
-    },
-    {
-      fecha: "2024-07-02",
-      descripcion: "Cena fuera",
-      categoria: "Alimentos",
-      monto: 180,
-    },
-    {
-      fecha: "2024-07-05",
-      descripcion: "Gasolina",
-      categoria: "Transporte",
-      monto: 200,
-    },
-    {
-      fecha: "2024-08-01",
-      descripcion: "Alquiler",
-      categoria: "Vivienda",
-      monto: 1200,
-    },
-    {
-      fecha: "2024-08-10",
-      descripcion: "Internet",
-      categoria: "Servicios",
-      monto: 150,
-    }
-  ];
-
 function UserMainPage() {
-    const [mostrarAddEgreso, setMostrarAddEgreso] = useState(false);
 
-    const [mostrarGrafico, setMostrarGrafico] = useState(false);
-    const [egresos, setEgresos] = useState(listaEgresos);
-    const [egresoEnEdicion, setEgresoEnEdicion] = useState(null);
+  const [mostrarAddEgreso, setMostrarAddEgreso] = useState(false)
+  const [mostrarGrafico, setMostrarGrafico] = useState(false)
+  const [egresos, setEgresos] = useState([])
+  const [egresoEnEdicion, setEgresoEnEdicion] = useState(null)
+
+  useEffect(() => {async function obtenerEgresos() {
+    try {
+      const token = localStorage.getItem("TOKEN")
+      const userId = localStorage.getItem("USER_ID")
+
+      const response = await fetch(`http://localhost:8000/egresos/usuario/${userId}`,
+        {
+          headers: {
+            "x-token": token
+          }
+        }
+      )
+
+      const data = await response.json()
+      setEgresos(data.data)
+
+    } catch (error) {
+      console.error("Error al obtener egresos:", error)
+    }
+  }
+
+  obtenerEgresos()
+}, [])
 
     const manejarEditar = (egreso) => {
       setEgresoEnEdicion(egreso);
