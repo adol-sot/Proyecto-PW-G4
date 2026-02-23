@@ -1,4 +1,5 @@
-function AddEgresos({ cerrarAddEgreso }) {
+function AddEgresos({ categorias, cerrarAddEgreso }) {
+    
     return <div className="relative bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
         <button onClick={cerrarAddEgreso} className="absolute top-3 right-3 text-gray-500 hover:text-black" type="button">
             X
@@ -6,15 +7,23 @@ function AddEgresos({ cerrarAddEgreso }) {
         
         <h2 className="text-2xl font-bold text-center">Registrar Egreso</h2>
         <hr className="my-5"></hr>
-        <form className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-1 xs:grid-cols-1 gap-y-2 text-center">
+        <form className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-1 xs:grid-cols-1 gap-y-2">
             <label className="ml-1">Fecha:</label>
             <input className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm text-center" type="date"/>
 
+            <label className="ml-1">Categoría:</label>
+            <select className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm text-center">
+                {
+                    categorias.map( function(categoria) {
+                        return <option key={ categoria.id } value={categoria.id}>
+                            { categoria.name }
+                        </option>
+                    } )
+                }
+            </select>
+
             <label className="ml-1">Monto:</label>
             <input className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm text-center" type="number"/>
-
-            <label className="ml-1">Categoría:</label>
-            <input className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm text-center" type="text"/>
 
             <label className="ml-1">Descripción:</label>
             <input className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm text-center" type="text"/>

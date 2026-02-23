@@ -12,6 +12,7 @@ function UserMainPage() {
   const [mostrarGrafico, setMostrarGrafico] = useState(false)
   const [egresos, setEgresos] = useState([])
   const [egresoEnEdicion, setEgresoEnEdicion] = useState(null)
+  const [categorias, setCategorias] = useState([])
 
   useEffect(() => {async function obtenerEgresos() {
     try {
@@ -62,6 +63,27 @@ function UserMainPage() {
       setEgresoEnEdicion(null);
     };
 
+    async function obtenerCategoriasHTTP(){
+        const URL = "http://127.0.0.1:8000/categorias/"
+        const response = await fetch(URL, {
+            headers : {
+                "x-token" : localStorage.getItem("TOKEN")
+            }
+        })
+        
+        if(!response.ok) {
+            console.log("Error de petición. " + response.status)
+            return
+        }
+
+        const data = await response.json()
+        setCategorias(data.data)
+    }
+
+    useEffect( function(){
+        obtenerCategoriasHTTP()
+    }, [])  //Se ejecuta solo la primera vez que se renderiza el componente
+
     return <div className="min-h-screen bg-blue-900 relative">
         <Navegacion />
 
@@ -77,7 +99,7 @@ function UserMainPage() {
 
         {mostrarAddEgreso && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-            <AddEgresos cerrarAddEgreso={function(){setMostrarAddEgreso(false)}}/>
+            <AddEgresos categorias={categorias} cerrarAddEgreso={function(){setMostrarAddEgreso(false)}}/>
           </div>
         )}
 
