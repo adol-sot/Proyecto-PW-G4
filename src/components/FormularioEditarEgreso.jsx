@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { editarEgreso } from "../services/services";
 
-function FormularioEditarEgreso({ egreso, onGuardar, onCancelar }) {
+function FormularioEditarEgreso({ egreso, egresoId, usuarioId, onGuardar, onCancelar }) {
   const [formData, setFormData] = useState({
     fecha: egreso.fecha,
     descripcion: egreso.descripcion,
@@ -18,12 +19,18 @@ function FormularioEditarEgreso({ egreso, onGuardar, onCancelar }) {
     }));
   };
 
-  const manejarGuardar = () => {
+  const manejarGuardar = async () => {
     if (!formData.fecha || !formData.descripcion || !formData.categoria || !formData.monto) {
       alert("Por favor completa todos los campos");
       return;
     }
-    onGuardar(formData);
+    
+    try {
+      await editarEgreso(usuarioId, egresoId, formData);
+      onGuardar(formData);
+    } catch (error) {
+      alert("Error al guardar: " + error.message);
+    }
   };
 
   return (
