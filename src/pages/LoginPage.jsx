@@ -10,8 +10,8 @@ function LoginPage() {
         const resp = await fetch("http://127.0.0.1:8000/login", {
             method : "POST",
             body : JSON.stringify({
-                correo : correo,
-                contra : contra
+                username : correo,
+                password : contra
             }),
             //Especificar el tipo de contenido
             headers : {
