@@ -6,7 +6,52 @@ function LoginPage() {
 
     const navigate = useNavigate()
 
-    function login(correo, contra) {
+    async function loginHTTP(correo, contra) {
+        const resp = await fetch("http://127.0.0.1:8000/login", {
+            method : "POST",
+            body : JSON.stringify({
+                username : correo,
+                password : contra
+            }),
+            //Especificar el tipo de contenido
+            headers : {
+                "content-type" : "application/json"
+            }
+        })
+        if (resp.status != 200) {
+            const data = await resp.json()
+            console.error("ERROR:", data)
+            return false
+        }
+
+        const data = await resp.json()
+        if (data.msg == "Login exitoso") {
+            localStorage.setItem("TOKEN", data.token)
+            localStorage.setItem("USER_ID", data.data.id)
+            localStorage.setItem("USER_ROLE", data.data.role)
+            return true
+        } else {
+            console.error(data.detail)
+            return false
+        }  
+    }
+
+    async function login(correo, contra) {
+        const resultadologin = await loginHTTP(correo, contra)
+
+         if ( resultadologin ) {
+            const role = localStorage.getItem("USER_ROLE")
+            if (role == "admin") {
+                navigate("/adminmain")
+            }
+            if (role == "user") {
+                navigate("/usermain")
+            }
+        } else {
+            console.log("Credenciales Incorrectas")
+        }
+
+        /*
         if (correo == "User@abc" && contra == "123") {
             localStorage.setItem("esAdmin", "false")
             console.log("Login Usuario Autentificado")
@@ -17,7 +62,7 @@ function LoginPage() {
             navigate("/adminmain")
         } else {
             console.log("Credenciales Incorrectas")
-        }
+        */
     }
 
     return <div className="flex justify-center bg-blue-900 shadow-lg min-h-screen">

@@ -19,18 +19,16 @@ function Navegacion() {
 
     return <nav className="bg-blue-500 shadow-lg py-4">
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-            <img className="h-12 rounded-xl" src="/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+            <div className="xs:visible ">
+                <img className="h-12 rounded-xl" src="/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+            </div>
+            
             <div className="flex items-center gap-4">
                 {esAdmin && (
                     <Link to="/adminmain" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
                         Admin
                     </Link>
                 )}
-                {!esAdmin &&
-                <Link to="/usermainseguridad" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
-                    Seguridad
-                </Link>
-                }
                 {!esAdmin &&
                 <Link to="/usermain" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
                     Egresos
@@ -39,6 +37,11 @@ function Navegacion() {
                 {!esAdmin &&
                 <Link to="/usermainfiltros" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
                     Filtros
+                </Link>
+                }
+                {!esAdmin &&
+                <Link to="/usermainseguridad" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Cuenta
                 </Link>
                 }
                 <Link to="/" onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-full font-medium hover:bg-red-600">
