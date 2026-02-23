@@ -1,6 +1,6 @@
 function AddEgresos({ categorias, cerrarAddEgreso }) {
     
-    return <div className="relative bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+    return <div className="relative bg-white rounded-xl shadow-lg p-6 w-full max-w-xl">
         <button onClick={cerrarAddEgreso} className="absolute top-3 right-3 text-gray-500 hover:text-black" type="button">
             X
         </button>
