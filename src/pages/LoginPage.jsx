@@ -30,6 +30,7 @@ function LoginPage() {
             localStorage.setItem("USER_ID", data.data.id)
             localStorage.setItem("USER_ROLE", data.data.role)
             localStorage.setItem("MAIL", data.data.email)
+            localStorage.setItem("NAME", data.data.full_name)
             return true
         } else {
             console.error(data.detail)
