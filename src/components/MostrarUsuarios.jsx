@@ -41,6 +41,7 @@ function MostrarUsuarios ()  {
         email: correo,
         role: "Usuario",
       };
+
       setUsers(users.concat(nuevoUsuario));
 
       setNombre("");
@@ -58,6 +59,7 @@ function MostrarUsuarios ()  {
             }
           : user
       );
+
       setUsers(usuariosActualizados);
       setIdEditar(null);
     }
@@ -71,10 +73,14 @@ function MostrarUsuarios ()  {
     setIdEditar(user.id);
   }
 
-  // Eliminar usuario
+  // Eliminar usuario con confirmación
   function eliminarUsuario(id) {
-    const usuariosFiltrados = users.filter(user => user.id !== id);
-    setUsers(usuariosFiltrados);
+    const confirmar = window.confirm("¿Estás seguro de que deseas eliminar este usuario?");
+
+    if (confirmar) {
+      const usuariosFiltrados = users.filter(user => user.id !== id);
+      setUsers(usuariosFiltrados);
+    }
   }
 
   return (
@@ -179,6 +185,7 @@ function MostrarUsuarios ()  {
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
 
