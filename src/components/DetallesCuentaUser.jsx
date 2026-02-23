@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-function DetallesCuentaUser() {
+function DetallesCuentaUser({ OnCambiarContra }) {
     const navigate = useNavigate()
 
     return <div className="mt-6 px-10">
@@ -16,7 +16,9 @@ function DetallesCuentaUser() {
 
         <form className="mt-2">
             <button className="mt-4 bg-yellow-300 w-full rounded-full p-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button"
-                onClick={function(){navigate("/usercambiarcontra")}}>
+                onClick={ function(){
+                    OnCambiarContra()
+                    } }>
                 Cambiar Contraseña
             </button>
         </form>
