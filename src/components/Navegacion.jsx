@@ -5,16 +5,37 @@ function Navegacion() {
     const [esAdmin, setEsAdmin] = useState(false)
 
     useEffect(function() {
-        const admin = localStorage.getItem("esAdmin")
-        if (admin === "true") {
+        const role = localStorage.getItem("USER_ROLE")
+        if (role === "admin") {
             setEsAdmin(true)
         } else {
             setEsAdmin(false)
         }
     }, [])
 
-    function handleLogout() {
-        localStorage.setItem("esAdmin", "false")
+    async function handleLogout() {
+        const token = localStorage.getItem("TOKEN")
+        const response = await fetch(`http://localhost:8000/logout`, {
+            method: "DELETE",
+            body : JSON.stringify({
+                token_acceso : token,
+            }),
+            headers: {
+                "content-type" : "application/json"
+            }
+        })
+        
+        if (response.status != 200) {
+            const data = await response.json()
+            console.error("ERROR:", data)
+        }
+
+        const data = await response.json()
+        if (data.msg == "Logout exitoso") {
+            console.log("Logout exitoso")
+            localStorage.clear()
+        }
+        
     }
 
     return <nav className="bg-blue-500 shadow-lg py-4">
