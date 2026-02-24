@@ -3,6 +3,28 @@ import { useNavigate } from "react-router-dom";
 function FormularioUserCambiarContra() {
     const navigate = useNavigate()
 
+    async function CambiarContra() {
+        const correo = localStorage.getItem("MAIL")
+        const URL = "http://localhost:8000/usuarios/cambiar-password-autorizado/"
+
+        let response
+        response = await fetch(URL + correo, {
+            method: "PUT",
+            headers : {
+                "x-token" : localStorage.getItem("TOKEN")
+            }
+        })
+
+        if (!response.ok) {
+            console.log("Error de petición. " + response.status)
+                return
+        }
+
+        const data = await response.json()
+        console.log(data.msg)
+        navigate("/usermainseguridad")
+    }
+
     return <div className="rounded-4xl shadow-md p-10 bg-white xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 xs:w-1/2">
             <h1 className="text-4xl font-bold place-self-center mb-6"> Cambiar Contraseña </h1  >
             <div>
@@ -10,7 +32,8 @@ function FormularioUserCambiarContra() {
                 <form className="grid">
                     <label className="text-sm font-medium mb-1">Contraseña actual</label>
                     <input type="password" className="rounded-full bg-gray-200 px-4 py-1"/>
-                    <p className="text-sm mt-1 text-blue-900 hover:text-amber-600"> ¿Olvidaste tu contraseña? </p>
+                    <p className="text-sm mt-1 text-blue-900 hover:text-amber-600" 
+                    onClick={ function(){ CambiarContra() } }> ¿Olvidaste tu contraseña? </p>
 
                     <label className="text-sm font-medium mb-1 mt-5">Nueva contraseña</label>
                     <input type="password" className="rounded-full bg-gray-200 px-4 py-1"/>
