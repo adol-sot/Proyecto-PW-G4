@@ -80,6 +80,31 @@ function UserMainPage() {
         setCategorias(data.data)
     }
 
+    async function RegistrarEgreso(fecha, categoriaSeleccionada, monto, descripcion) {
+      const URL = "http://localhost:8000/egresos/crear"
+      const userId = localStorage.getItem("USER_ID")
+
+      const response = await fetch(URL, {
+        method: "POST",
+        body : JSON.stringify({
+                amount : monto,
+                expense_date : fecha,
+                description : descripcion,
+                user_id: userId,
+                category_id : categoriaSeleccionada
+            }),
+        headers : {
+                "x-token" : localStorage.getItem("TOKEN"),
+                "content-type" : "application/json"
+            } }
+          )
+        
+       if(!response.ok) {
+            console.log("Error de petición. " + response.status)
+            return
+        } 
+    }
+
     useEffect( function(){
         obtenerCategoriasHTTP()
     }, [])  //Se ejecuta solo la primera vez que se renderiza el componente
@@ -99,7 +124,7 @@ function UserMainPage() {
 
         {mostrarAddEgreso && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-            <AddEgresos categorias={categorias} cerrarAddEgreso={function(){setMostrarAddEgreso(false)}}/>
+            <AddEgresos categorias={categorias} cerrarAddEgreso={function(){setMostrarAddEgreso(false)}} OnRegistroEgreso={ RegistrarEgreso } />
           </div>
         )}
 

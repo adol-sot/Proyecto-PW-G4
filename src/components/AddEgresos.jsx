@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function AddEgresos({ categorias, cerrarAddEgreso }) {
+function AddEgresos({ categorias, cerrarAddEgreso, OnRegistroEgreso }) {
 
     const [fecha, setFecha] = useState("")
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("")
@@ -41,7 +41,10 @@ function AddEgresos({ categorias, cerrarAddEgreso }) {
         </form>
 
         <form className="flex justify-center">
-            <button className="mt-5 bg-yellow-300 xl:w-1/2 lg:w-1/2 md:w-1/2 sm:w-full xs:w-full rounded-full py-2 px-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button">
+            <button className="mt-5 bg-yellow-300 xl:w-1/2 lg:w-1/2 md:w-1/2 sm:w-full xs:w-full rounded-full py-2 px-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button"
+            onClick={function() { 
+                OnRegistroEgreso(fecha, categoriaSeleccionada, monto, descripcion)
+             } }>
                 Registrar
             </button>
         </form>
