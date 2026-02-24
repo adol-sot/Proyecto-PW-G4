@@ -14,31 +14,30 @@ function UserMainPage() {
   const [egresoEnEdicion, setEgresoEnEdicion] = useState(null)
   const [categorias, setCategorias] = useState([])
 
-  async function obtenerEgresos() {
-    try {
-      const token = localStorage.getItem("TOKEN")
-      const userId = localStorage.getItem("USER_ID")
+    async function obtenerEgresos() {
+      try {
+        const token = localStorage.getItem("TOKEN")
+        const userId = localStorage.getItem("USER_ID")
 
-      const response = await fetch(
-        `http://localhost:8000/egresos/usuario/${userId}`,
-        {
-          headers: {
-            "x-token": token
+        const response = await fetch(`http://localhost:8000/egresos/usuario/${userId}`,
+          {
+            headers: {
+              "x-token": token
+            }
           }
-        }
-      )
+        )
 
-      const data = await response.json()
-      setEgresos(data.data)
+        const data = await response.json()
+        setEgresos(data.data)
 
-    } catch (error) {
-      console.error("Error al obtener egresos:", error)
+      } catch (error) {
+        console.error("Error al obtener egresos:", error)
+      }
     }
-  }
 
-  useEffect(() => {
-    obtenerEgresos()
-  }, [])
+    useEffect(() => {
+      obtenerEgresos()
+    }, [])
 
     const manejarEditar = (egreso) => {
       setEgresoEnEdicion(egreso);
