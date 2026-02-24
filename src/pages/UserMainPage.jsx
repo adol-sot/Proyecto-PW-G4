@@ -135,7 +135,8 @@ function UserMainPage() {
         </div>
 
         {egresoEnEdicion && (
-          <FormularioEditarEgreso 
+          <FormularioEditarEgreso
+            categorias={categorias} 
             egreso={egresoEnEdicion} 
             onGuardar={EditarGuardar} 
             onCancelar={EditarCancelar}
