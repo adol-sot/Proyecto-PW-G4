@@ -74,9 +74,9 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
                     +
                 </button>
                 <button
-                    onClick={function () { navigate("/gastos-atipicos") }}
-                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-200">
-                    Ver gastos atipicos
+                    onClick={abrir}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                    Ver gráfico
                 </button>
                 <button
                     onClick={() => setShowExportModal(true)}
@@ -126,13 +126,6 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
                         ))}
                     </tbody>
                 </table>
-                <div className="flex justify-center mt-4">
-                    <button type="button"
-                        onClick={abrir}
-                        className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-amber-600">
-                        Ver gráfico de egresos
-                    </button>
-                </div>
             </div>
 
         )}

@@ -51,6 +51,11 @@ function Navegacion() {
                     </Link>
                 )}
                 {!esAdmin &&
+                <Link to="/gastos-atipicos" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Gastos atipicos
+                </Link>
+                }
+                {!esAdmin &&
                 <Link to="/usermain" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
                     Egresos
                 </Link>
