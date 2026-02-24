@@ -2,12 +2,13 @@ import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable';
 import { useNavigate } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
 
     const navigate = useNavigate()
     const csvLinkRef = useRef();
+    const [showExportModal, setShowExportModal] = useState(false);
 
     const egresosOrdenados = [...egresos].sort((a, b) => {
         return new Date(b.fecha) - new Date(a.fecha)
@@ -49,12 +50,14 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
         doc.text(`Total: S/${total.toFixed(2)}`, 14, finalY + 10);
 
         doc.save('egresos.pdf');
+        setShowExportModal(false);
     };
 
     const exportarCSV = () => {
         if (csvLinkRef.current) {
             csvLinkRef.current.link.click();
         }
+        setShowExportModal(false);
     };
 
         
@@ -76,14 +79,9 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
                     Ver gastos atipicos
                 </button>
                 <button
-                    onClick={exportarPDF}
+                    onClick={() => setShowExportModal(true)}
                     className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
-                    Exportar a PDF
-                </button>
-                <button
-                    onClick={exportarCSV}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
-                    Exportar a CSV
+                    Exportar
                 </button>
             </div>
         </div>
@@ -154,6 +152,31 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
             filename={"egresos.csv"}
             style={{ display: 'none' }}
         />
+
+        {showExportModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full mx-4">
+                    <h3 className="text-lg font-semibold mb-4">Selecciona el tipo de exportación</h3>
+                    <div className="flex gap-3">
+                        <button
+                            onClick={exportarPDF}
+                            className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                            Exportar PDF
+                        </button>
+                        <button
+                            onClick={exportarCSV}
+                            className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                            Exportar CSV
+                        </button>
+                        <button
+                            onClick={() => setShowExportModal(false)}
+                            className="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded transition duration-200">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
     </div>
 }
 
