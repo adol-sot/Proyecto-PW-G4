@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { obtenerCategoriasHTTP } from "../pages/UserMainPage"
 
+async function editarEgreso(usuarioId, egresoId, datosEgreso) { 
 
-
-async function editarEgreso(usuarioId, egresoId, datosEgreso) {
+  
     const response = await fetch(`http://localhost:8000/editar/${egresoId}`, {
         method: "PUT",
         headers: {
@@ -26,7 +27,7 @@ function FormularioEditarEgreso({ egreso, egresoId, usuarioId, onGuardar, onCanc
     monto: egreso.monto
   });
 
-  const categorias = ["Alimentos", "Transporte", "Servicios", "Vivienda", "Salud", "Entretenimiento", "Educación", "Otros"];
+  const categorias = [obtenerCategoriasHTTP()];
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
