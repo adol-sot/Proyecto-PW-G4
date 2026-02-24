@@ -8,34 +8,56 @@ function FormularioUserCambiarContra() {
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
-    async function cambiarPassword() {
+    const [modalVisible, setModalVisible] = useState(false)
+    const [modalMensaje, setModalMensaje] = useState("")
+    const [esExito, setEsExito] = useState(false)
 
+    function mostrarModal(mensaje, exito = false) {
+        setModalMensaje(mensaje)
+        setEsExito(exito)
+        setModalVisible(true)
+    }
+
+    async function cambiarPassword() {
         if (newPassword !== confirmPassword) {
+            mostrarModal("Las contraseñas no coinciden");
             console.log("Las contraseñas no coinciden")
             return;
         }
 
-        const response = await fetch("http://localhost:8000/usuarios/cambiar-password-autorizado", {
-            method: "PUT",
-            body: JSON.stringify({
-                email: localStorage.getItem("MAIL"),
-                old_password: password,
-                new_password: newPassword
-            }), 
-            headers: {
-                "x-token": localStorage.getItem("TOKEN"),
-                "content-type" : "application/json"
+        try {
+            const response = await fetch("http://localhost:8000/usuarios/cambiar-password-autorizado", {
+                method: "PUT",
+                body: JSON.stringify({
+                    email: localStorage.getItem("MAIL"),
+                    old_password: password,
+                    new_password: newPassword
+                }), 
+                headers: {
+                    "x-token": localStorage.getItem("TOKEN"),
+                    "content-type" : "application/json"
+                }
+            })
+
+            const data = await response.json()
+            if (response.ok) {
+                console.log("Contraseña actualizada correctamente")
+                mostrarModal("Contraseña actualizada correctamente", true)
+            } else {
+                console.log(data.detail)
+                mostrarModal(data.detail)
             }
-        })
-
-        const data = await response.json()
-
-        if (response.ok) {
-            console.log("Contraseña actualizada correctamente")
-        } else {
-            console.log(data.detail)
+        } catch (error) {
+            alert("Error de conexión con el servidor")
         }
      }
+
+    function cerrarModal() {
+        setModalVisible(false)
+        if (esExito) {
+            navigate("/usermainseguridad")
+        }
+    }
 
     async function CambiarContra() {
         const correo = localStorage.getItem("MAIL")
@@ -92,6 +114,17 @@ function FormularioUserCambiarContra() {
                     </button>
                 </form>
             </div>
+            {modalVisible && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+                    <div className="bg-white rounded-xl p-6 w-80 text-center shadow-xl">
+                        <p className="mb-4">{modalMensaje}</p>
+                        <button onClick={cerrarModal}
+                            className="px-4 py-2 rounded-full font-semibold bg-blue-500 text-white hover:bg-blue-600">
+                            Aceptar
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
 }
 
