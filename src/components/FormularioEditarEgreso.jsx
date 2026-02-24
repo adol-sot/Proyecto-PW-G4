@@ -21,11 +21,13 @@ async function editarEgreso(usuarioId, egresoId, datosEgreso) {
 
 function FormularioEditarEgreso({ categorias, egreso, egresoId, usuarioId, onGuardar, onCancelar }) {
   const [formData, setFormData] = useState({
-    fecha: egreso.fecha,
-    descripcion: egreso.descripcion,
-    categoria: egreso.categoria,
-    monto: egreso.monto
+    fecha: egreso.expense_date.split("T")[0],
+    descripcion: egreso.description,
+    categoria: egreso.category,
+    monto: egreso.amount
   });
+
+  
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("")
 
 
