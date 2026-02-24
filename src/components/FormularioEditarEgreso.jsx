@@ -1,5 +1,22 @@
 import { useState } from "react";
-//import { editarEgreso } from "../services/services";
+
+
+
+async function editarEgreso(usuarioId, egresoId, datosEgreso) {
+    const response = await fetch(`http://localhost:8000/editar/${egresoId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datosEgreso),
+    });
+
+    if (!response.ok) {
+        throw new Error("Error al editar egreso");
+    }
+
+    return await response.json();
+}
 
 function FormularioEditarEgreso({ egreso, egresoId, usuarioId, onGuardar, onCancelar }) {
   const [formData, setFormData] = useState({
