@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { obtenerCategoriasHTTP } from "../pages/UserMainPage"
+import { useEffect, useState } from "react";
+import { func } from "prop-types";
 
 async function editarEgreso(usuarioId, egresoId, datosEgreso) { 
 
   
-    const response = await fetch(`http://localhost:8000/editar/${egresoId}`, {
+    const response = await fetch(`http://localhost:8000/egresos/editar/${egresoId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -19,15 +19,15 @@ async function editarEgreso(usuarioId, egresoId, datosEgreso) {
     return await response.json();
 }
 
-function FormularioEditarEgreso({ egreso, egresoId, usuarioId, onGuardar, onCancelar }) {
+function FormularioEditarEgreso({ categorias, egreso, egresoId, usuarioId, onGuardar, onCancelar }) {
   const [formData, setFormData] = useState({
     fecha: egreso.fecha,
     descripcion: egreso.descripcion,
     categoria: egreso.categoria,
     monto: egreso.monto
   });
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("")
 
-  const categorias = [obtenerCategoriasHTTP()];
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -84,14 +84,16 @@ function FormularioEditarEgreso({ egreso, egresoId, usuarioId, onGuardar, onCanc
             <label className="block text-gray-700 font-semibold mb-2">Categoría</label>
             <select
               name="categoria"
-              value={formData.categoria}
-              onChange={manejarCambio}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500"
-            >
-              <option value="">Selecciona una categoría</option>
-              {categorias.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
+              value={categoriaSeleccionada}
+              onChange={function(ev) { setCategoriaSeleccionada(ev.target.value) }}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500">
+              {
+                    categorias.map( function(categoria) {
+                        return <option key={ categoria.id } value={categoria.id}>
+                            { categoria.name }
+                        </option>
+                    } )
+                }
             </select>
           </div>
 
