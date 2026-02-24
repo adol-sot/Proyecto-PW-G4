@@ -104,7 +104,8 @@ function UserMainPage() {
        if(!response.ok) {
             console.log("Error de petición. " + response.status)
             return
-        } 
+        }
+        obtenerEgresos()
     }
 
     useEffect( function(){
