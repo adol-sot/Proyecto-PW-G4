@@ -14,12 +14,13 @@ function UserMainPage() {
   const [egresoEnEdicion, setEgresoEnEdicion] = useState(null)
   const [categorias, setCategorias] = useState([])
 
-  useEffect(() => {async function obtenerEgresos() {
+  async function obtenerEgresos() {
     try {
       const token = localStorage.getItem("TOKEN")
       const userId = localStorage.getItem("USER_ID")
 
-      const response = await fetch(`http://localhost:8000/egresos/usuario/${userId}`,
+      const response = await fetch(
+        `http://localhost:8000/egresos/usuario/${userId}`,
         {
           headers: {
             "x-token": token
@@ -35,8 +36,9 @@ function UserMainPage() {
     }
   }
 
-  obtenerEgresos()
-}, [])
+  useEffect(() => {
+    obtenerEgresos()
+  }, [])
 
     const manejarEditar = (egreso) => {
       setEgresoEnEdicion(egreso);
