@@ -70,7 +70,7 @@ function ListadoEgresos({ egresos, onEditar, abrir, abrirAddEgresos }) {
             <div className="flex gap-6">
                 <button
                     onClick={abrirAddEgresos}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-200">
+                    className="bg-gray-200 hover:bg-green-500 text-black font-bold py-2 px-4 rounded transition duration-200">
                     +
                 </button>
                 <button
