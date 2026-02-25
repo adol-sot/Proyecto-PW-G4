@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-function MostrarUsuarios ()  {
+function MostrarUsuarios() {
 
-  // Lista de usuarios (desde localStorage o datos iniciales)
   const [users, setUsers] = useState(() => {
     const datosGuardados = localStorage.getItem("usuarios");
     return datosGuardados
@@ -16,22 +15,18 @@ function MostrarUsuarios ()  {
         ];
   });
 
-  // Guardar en localStorage cada vez que cambie users
   useEffect(() => {
     localStorage.setItem("usuarios", JSON.stringify(users));
   }, [users]);
 
-  // Datos del formulario
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [correo, setCorreo] = useState("");
-
-  // ID del usuario que se está editando
   const [idEditar, setIdEditar] = useState(null);
+  const [mostrarModal, setMostrarModal] = useState(false);
 
-  // Crear o Editar usuario
   function crearUsuario(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     if (idEditar === null) {
       const nuevoUsuario = {
@@ -43,7 +38,6 @@ function MostrarUsuarios ()  {
       };
 
       setUsers(users.concat(nuevoUsuario));
-
       setNombre("");
       setApellido("");
       setCorreo("");
@@ -62,21 +56,23 @@ function MostrarUsuarios ()  {
 
       setUsers(usuariosActualizados);
       setIdEditar(null);
+      setMostrarModal(false);
+      setNombre("");
+      setApellido("");
+      setCorreo("");
     }
   }
 
-  // Cargar datos al formulario
   function editarUsuario(user) {
     setNombre(user.nombre);
     setApellido(user.apellido);
     setCorreo(user.email);
     setIdEditar(user.id);
+    setMostrarModal(true);
   }
 
-  // Eliminar usuario con confirmación
   function eliminarUsuario(id) {
     const confirmar = window.confirm("¿Estás seguro de que deseas eliminar este usuario?");
-
     if (confirmar) {
       const usuariosFiltrados = users.filter(user => user.id !== id);
       setUsers(usuariosFiltrados);
@@ -90,15 +86,10 @@ function MostrarUsuarios ()  {
         Gestión de Usuarios
       </h2>
 
-      {/* Formulario */}
+      {/* Formulario Crear */}
       <form
         onSubmit={crearUsuario}
-        className="
-          grid grid-cols-1
-          sm:grid-cols-2
-          md:flex md:gap-4
-          gap-4 mb-12 items-end
-        "
+        className="grid grid-cols-1 sm:grid-cols-2 md:flex md:gap-4 gap-4 mb-12 items-end"
       >
 
         <div>
@@ -135,12 +126,9 @@ function MostrarUsuarios ()  {
         </div>
 
         <button
-          className="
-            bg-blue-600 text-white px-4 h-10 rounded-md
-            w-full sm:col-span-2 md:w-auto
-          "
+          className="bg-blue-600 text-white px-4 h-10 rounded-md w-full sm:col-span-2 md:w-auto"
         >
-          {idEditar === null ? "Crear" : "Guardar"}
+          Crear
         </button>
 
       </form>
@@ -188,6 +176,55 @@ function MostrarUsuarios ()  {
 
         </table>
       </div>
+
+      {/* Modal Editar */}
+      {mostrarModal && (
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
+            <h3 className="text-lg font-bold mb-4">Editar Usuario</h3>
+
+            <input
+              type="text"
+              placeholder="Nombre"
+              value={nombre}
+              onChange={e => setNombre(e.target.value)}
+              className="border p-2 mb-2 w-full rounded"
+            />
+
+            <input
+              type="text"
+              placeholder="Apellido"
+              value={apellido}
+              onChange={e => setApellido(e.target.value)}
+              className="border p-2 mb-2 w-full rounded"
+            />
+
+            <input
+              type="email"
+              placeholder="Correo"
+              value={correo}
+              onChange={e => setCorreo(e.target.value)}
+              className="border p-2 mb-4 w-full rounded"
+            />
+
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setMostrarModal(false)}
+                className="bg-gray-400 text-white px-3 py-1 rounded"
+              >
+                Cancelar
+              </button>
+
+              <button
+                onClick={crearUsuario}
+                className="bg-blue-600 text-white px-3 py-1 rounded"
+              >
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
