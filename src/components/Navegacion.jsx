@@ -42,7 +42,7 @@ function Navegacion() {
     return <nav className="bg-blue-500 shadow-lg py-4">
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
             <div className="xs:visible ">
-                <img className="h-12 rounded-xl" src="/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+                <img className="h-12 rounded-xl" src="/Proyecto-PW-G4/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
             </div>
             
             <div className="flex items-center gap-4">
