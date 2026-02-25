@@ -12,7 +12,7 @@ function PresupuestoPage() {
       const userId = localStorage.getItem("USER_ID");
 
       const response = await fetch(
-        `http://localhost:8000/egresos/usuario/${userId}`,
+        `https://proyecto-pw-g4-backend-1.onrender.com/egresos/usuario/${userId}`,
         {
           headers: {
             "x-token": token

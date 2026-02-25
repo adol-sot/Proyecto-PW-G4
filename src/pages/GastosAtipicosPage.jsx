@@ -13,7 +13,7 @@ function GastosAtipicosPage() {
                 const token = localStorage.getItem("TOKEN")
                 const userId = localStorage.getItem("USER_ID")
 
-                const response = await fetch(`http://localhost:8000/egresos/${userId}/atipicos`,
+                const response = await fetch(`https://proyecto-pw-g4-backend-1.onrender.com/egresos/${userId}/atipicos`,
                     {
                         headers: {
                             "x-token": token

@@ -30,7 +30,7 @@ function FormularioUserCambiarContra() {
         }
 
         try {
-            const response = await fetch("http://localhost:8000/usuarios/cambiar-password", {
+            const response = await fetch("https://proyecto-pw-g4-backend-1.onrender.com/usuarios/cambiar-password", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

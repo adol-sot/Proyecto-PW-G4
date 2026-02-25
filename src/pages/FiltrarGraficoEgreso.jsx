@@ -14,9 +14,9 @@ function FiltrarGraficoEgreso({ cerrar }) {
                 let url = ""
 
                 if (tipoGrafico === "categoria") {
-                    url = `http://localhost:8000/egresos/grafico/categoria/${userId}`
+                    url = `https://proyecto-pw-g4-backend-1.onrender.com/egresos/grafico/categoria/${userId}`
                 } else {
-                    url = `http://localhost:8000/egresos/grafico/mensual/${userId}`
+                    url = `https://proyecto-pw-g4-backend-1.onrender.com/egresos/grafico/mensual/${userId}`
                 }
 
                 const response = await fetch(url, {

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 async function editarEgreso(egresoId, datosEgreso) {
   const token = localStorage.getItem("TOKEN");
 
-  const response = await fetch(`http://localhost:8000/egresos/editar/${egresoId}`, {
+  const response = await fetch(`https://proyecto-pw-g4-backend-1.onrender.com/egresos/editar/${egresoId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -18,7 +18,7 @@ function UserMainPage() {
       const token = localStorage.getItem("TOKEN")
       const userId = localStorage.getItem("USER_ID")
 
-      const response = await fetch(`http://localhost:8000/egresos/usuario/${userId}`, {
+      const response = await fetch(`https://proyecto-pw-g4-backend-1.onrender.com/egresos/usuario/${userId}`, {
         headers: {
           "x-token": token
         }
@@ -54,7 +54,7 @@ function UserMainPage() {
   };
 
   async function obtenerCategoriasHTTP() {
-    const URL = "http://127.0.0.1:8000/categorias/"
+    const URL = "https://proyecto-pw-g4-backend-1.onrender.com/categorias/"
     const response = await fetch(URL, {
       headers: {
         "x-token": localStorage.getItem("TOKEN")
@@ -71,7 +71,7 @@ function UserMainPage() {
   }
 
   async function RegistrarEgreso(fecha, categoriaSeleccionada, monto, descripcion) {
-    const URL = "http://localhost:8000/egresos/crear"
+    const URL = "https://proyecto-pw-g4-backend-1.onrender.com/egresos/crear"
     const userId = localStorage.getItem("USER_ID")
 
     const response = await fetch(URL, {

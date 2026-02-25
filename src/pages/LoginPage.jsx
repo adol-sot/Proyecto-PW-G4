@@ -18,7 +18,7 @@ function LoginPage() {
     }
 
     async function loginHTTP(correo, contra) {
-        const resp = await fetch("http://127.0.0.1:8000/login", {
+        const resp = await fetch("https://proyecto-pw-g4-backend-1.onrender.com/login", {
             method : "POST",
             body : JSON.stringify({
                 username : correo,

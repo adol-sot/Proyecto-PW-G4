@@ -16,7 +16,7 @@ function Navegacion() {
 
     async function handleLogout() {
         const token = localStorage.getItem("TOKEN")
-        const response = await fetch(`http://localhost:8000/logout`, {
+        const response = await fetch(`https://proyecto-pw-g4-backend-1.onrender.com/logout`, {
             method: "DELETE",
             body : JSON.stringify({
                 token : token,

@@ -12,7 +12,7 @@ function CuerpoPeticionRecuperacion() {
     async function solicitarRecuperacion() {
         try {
             const response = await fetch(
-                "http://localhost:8000/usuarios/solicitar-recuperacion",
+                "https://proyecto-pw-g4-backend-1.onrender.com/usuarios/solicitar-recuperacion",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

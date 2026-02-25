@@ -26,7 +26,7 @@ function FormularioUserCambiarContra() {
         }
 
         try {
-            const response = await fetch("http://localhost:8000/usuarios/cambiar-password-autorizado", {
+            const response = await fetch("https://proyecto-pw-g4-backend-1.onrender.com/usuarios/cambiar-password-autorizado", {
                 method: "PUT",
                 body: JSON.stringify({
                     email: localStorage.getItem("MAIL"),
@@ -61,7 +61,7 @@ function FormularioUserCambiarContra() {
 
     async function CambiarContra() {
         const correo = localStorage.getItem("MAIL")
-        const URL = "http://localhost:8000/usuarios/cambiar-password-autorizado/"
+        const URL = "https://proyecto-pw-g4-backend-1.onrender.com/usuarios/cambiar-password-autorizado/"
 
         let response
         response = await fetch(URL + correo, {
