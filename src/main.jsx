@@ -14,11 +14,12 @@ import UserMainPageSeguridad from './pages/UserMainPageSeguridad'
 import UserCambiarContra from './pages/UserCambiarContra'
 import GastosAtipicosPage from './pages/GastosAtipicosPage'
 import CambiarContra from './pages/CambiarContra'
-import PresupuestoPage from "./pages/PresupuestoPage";
+import PresupuestoPage from "./pages/PresupuestoPage"
+import { HashRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename='/Proyecto-PW-G4'>
+    <HashRouter>
       <Routes>
         <Route path='/' element={<LoginPage />}/>
         <Route path='/register' element={<RegisterPage />}/>
@@ -33,6 +34,6 @@ createRoot(document.getElementById('root')).render(
         <Route path='/cambiar-contra' element={<CambiarContra />}/>
         <Route path="/presupuesto" element={<PresupuestoPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 )
