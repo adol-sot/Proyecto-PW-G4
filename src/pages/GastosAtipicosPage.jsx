@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import Navegacion from "../components/Navegacion"
 
 function GastosAtipicosPage() {
 
@@ -36,22 +37,17 @@ function GastosAtipicosPage() {
     }, [])
 
     return <div className="bg-blue-900 min-h-screen">
+        <Navegacion />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
             <div className="text-yellow-400 flex flex-col md:flex-row md:justify-between md:items-center mb-8">
                 <div>
                     <h1 className="text-4xl font-bold mb-2">
                         Gastos Atípicos
                     </h1>
-                    <p className="text-xl mb-8">
+                    <p className="text-xl">
                         Detectamos gastos que sobrepasan tu comportamiento financiero habitual.
                     </p>
                 </div>
-
-                <button className="bg-gray-300 rounded-2xl text-black px-3 py-1 text-xl hover:bg-gray-400"
-                        type="button"
-                        onClick={() => navigate("/usermain")}>
-                    Volver
-                </button>
             </div>
 
             {gastos.length === 0 && (
