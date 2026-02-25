@@ -22,6 +22,7 @@ function AddEgresos({ categorias, cerrarAddEgreso, OnRegistroEgreso }) {
             <label className="ml-1">Categoría:</label>
             <select className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm text-center" 
             value={categoriaSeleccionada} onChange={function(ev) { setCategoriaSeleccionada(ev.target.value) }}>
+                <option value="">Selecciona una categoría</option>
                 {
                     categorias.map( function(categoria) {
                         return <option key={ categoria.id } value={categoria.id}>

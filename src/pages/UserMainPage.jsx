@@ -43,21 +43,13 @@ function UserMainPage() {
       setEgresoEnEdicion(egreso);
     };
 
-    const EditarGuardar = (formData) => {
-      const egresosActualizados = egresos.map(egreso => 
-        egreso === egresoEnEdicion 
-          ? {
-              ...egreso,
-              fecha: formData.fecha,
-              descripcion: formData.descripcion,
-              categoria: formData.categoria,
-              monto: Number(formData.monto)
-            }
-          : egreso
-      );
-
-      setEgresos(egresosActualizados);
-      setEgresoEnEdicion(null);
+    const EditarGuardar = async () => {
+      try {
+        await obtenerEgresos();   
+        setEgresoEnEdicion(null); 
+      } catch (error) {
+        console.error("Error al actualizar lista:", error);
+      }
     };
 
     const EditarCancelar = () => {
