@@ -11,6 +11,15 @@ function PresupuestoCategoria({ egresos }) {
     "Salud"
   ];
 
+  const coloresCategorias = {
+    Alimentos: "bg-yellow-200 text-yellow-800",
+    Servicios: "bg-green-200 text-green-800",
+    Transporte: "bg-blue-200 text-blue-800",
+    Vivienda: "bg-purple-200 text-purple-800",
+    Entretenimiento: "bg-pink-200 text-pink-800",
+    Salud: "bg-red-200 text-red-800"
+  };
+
   const [presupuestos, setPresupuestos] = useState({
     Alimentos: "",
     Servicios: "",
@@ -34,11 +43,7 @@ function PresupuestoCategoria({ egresos }) {
   }
 
   return (
-    <div className="
-      bg-white shadow rounded-xl p-4 mt-6
-      max-w-3xl
-      mx-auto
-    ">
+    <div className="bg-white shadow rounded-xl p-6 max-w-3xl mx-auto">
 
       <h2 className="text-lg font-bold text-center mb-6">
         Presupuesto mensual por categoría
@@ -57,9 +62,10 @@ function PresupuestoCategoria({ egresos }) {
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
-                <div className="font-semibold text-lg">
+                {/* BADGE DE CATEGORÍA */}
+                <span className={`px-4 py-1 rounded-full font-semibold text-sm w-fit ${coloresCategorias[cat]}`}>
                   {cat}
-                </div>
+                </span>
 
                 <input
                   type="number"
