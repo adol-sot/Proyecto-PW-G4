@@ -14,6 +14,7 @@ import UserMainPageSeguridad from './pages/UserMainPageSeguridad'
 import UserCambiarContra from './pages/UserCambiarContra'
 import GastosAtipicosPage from './pages/GastosAtipicosPage'
 import CambiarContra from './pages/CambiarContra'
+import PresupuestoPage from "./pages/PresupuestoPage";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/usercambiarcontra' element={ <UserCambiarContra/>}/>
         <Route path='/gastos-atipicos' element={<GastosAtipicosPage />}/>
         <Route path='/cambiar-contra' element={<CambiarContra />}/>
+        <Route path="/presupuesto" element={<PresupuestoPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

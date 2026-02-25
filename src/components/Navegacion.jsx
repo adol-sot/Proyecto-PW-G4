@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
+
 function Navegacion() {
     const [esAdmin, setEsAdmin] = useState(false)
 
@@ -70,9 +71,14 @@ function Navegacion() {
                     Cuenta
                 </Link>
                 }
+                  <Link to="/presupuesto" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Presupuesto
+                </Link>
                 <Link to="/" onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-full font-medium hover:bg-red-600">
                     Cerrar Sesión
                 </Link>
+              
+
             </div>
         </div>
     </nav>

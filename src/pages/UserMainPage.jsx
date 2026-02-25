@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import ListadoEgresos from "../components/ListadoEgresos";
 import Navegacion from "../components/Navegacion";
-import PresupuestoCategoria from "../components/PresupuestoCategoria";
 import FiltrarGraficoEgreso from "./FiltrarGraficoEgreso";
 import FormularioEditarEgreso from "../components/FormularioEditarEgreso";
 import AddEgresos from "../components/AddEgresos";
@@ -107,10 +106,7 @@ function UserMainPage() {
 
       <Navegacion />
 
-      {/* 🔥 PRESUPUESTO ARRIBA */}
-      <div className="p-8">
-        <PresupuestoCategoria egresos={egresos} />
-      </div>
+     
 
       {/* LISTADO DE EGRESOS */}
       <div className="p-8">
