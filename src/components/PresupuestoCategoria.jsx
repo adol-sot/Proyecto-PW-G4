@@ -2,74 +2,96 @@ import { useState } from "react";
 
 function PresupuestoCategoria({ egresos }) {
 
-  const [categoria, setCategoria] = useState("");
-  const [presupuesto, setPresupuesto] = useState("");
+  const categorias = [
+    "Alimentos",
+    "Servicios",
+    "Transporte",
+    "Vivienda",
+    "Entretenimiento",
+    "Salud"
+  ];
 
-  const gastosCategoria = egresos.filter(
-    egreso => egreso.categoria === categoria
-  );
+  const [presupuestos, setPresupuestos] = useState({
+    Alimentos: "",
+    Servicios: "",
+    Transporte: "",
+    Vivienda: "",
+    Entretenimiento: "",
+    Salud: ""
+  });
 
-  const totalGastos = gastosCategoria.reduce(
-    (total, egreso) => total + egreso.monto,
-    0
-  );
+  function cambiarPresupuesto(categoria, valor) {
+    setPresupuestos({
+      ...presupuestos,
+      [categoria]: valor
+    });
+  }
 
-  const diferencia = presupuesto - totalGastos;
+  function calcularTotal(categoria) {
+    return egresos
+      .filter(egreso => egreso.categoria === categoria)
+      .reduce((total, egreso) => total + egreso.monto, 0);
+  }
 
   return (
     <div className="
       bg-white shadow rounded-xl p-4 mt-6
-      grid grid-cols-1
-      sm:grid-cols-2
-      md:grid-cols-2
-      gap-4
       max-w-3xl
       mx-auto
     ">
 
-      {/* Título */}
-      <h2 className="text-lg font-bold text-center sm:col-span-2 md:col-span-2">
+      <h2 className="text-lg font-bold text-center mb-6">
         Presupuesto mensual por categoría
       </h2>
 
-      {/* Categoría */}
-      <div className="col-span-1">
-        <select
-          value={categoria}
-          onChange={e => setCategoria(e.target.value)}
-          className="border p-2 rounded-xl w-full"
-        >
-          <option>Alimentos</option>
-          <option>Servicios</option>
-          <option>Transporte</option>
-          <option>Vivienda</option>
-        </select>
+      <div className="space-y-6">
+
+        {categorias.map(cat => {
+
+          const totalGastos = calcularTotal(cat);
+          const presupuestoNumero = Number(presupuestos[cat] || 0);
+          const diferencia = presupuestoNumero - totalGastos;
+
+          return (
+            <div key={cat} className="border rounded-xl p-4">
+
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                <div className="font-semibold text-lg">
+                  {cat}
+                </div>
+
+                <input
+                  type="number"
+                  placeholder="Ingrese presupuesto"
+                  value={presupuestos[cat]}
+                  onChange={e => cambiarPresupuesto(cat, e.target.value)}
+                  className="border p-2 rounded-xl w-full sm:w-48"
+                />
+
+              </div>
+
+              <div className="mt-3 text-sm">
+
+                <p>
+                  Total gastado: <strong>S/ {totalGastos}</strong>
+                </p>
+
+                {presupuestos[cat] !== "" && (
+                  <p className={`font-bold ${
+                    diferencia >= 0 ? "text-green-600" : "text-red-600"
+                  }`}>
+                    Disponible: S/ {diferencia}
+                  </p>
+                )}
+
+              </div>
+
+            </div>
+          );
+        })}
+
       </div>
-
-      {/* Presupuesto */}
-      <div className="col-span-1">
-        <input
-          type="number"
-          placeholder="Ingrese su presupuesto"
-          value={presupuesto}
-          onChange={e => setPresupuesto(e.target.value)}
-          className="border p-2 rounded-xl w-full"
-        />
-      </div>
-
-      {/* Total gastado */}
-      <p className="text-center sm:col-span-2 md:col-span-2">
-        Total gastado: <strong>S/ {totalGastos}</strong>
-      </p>
-
-      {/* Comparación */}
-      <p
-        className={`font-bold text-center sm:col-span-2 md:col-span-2 ${
-          diferencia >= 0 ? "text-green-600" : "text-red-600"
-        }`}
-      >
-        Comparación: S/ {diferencia}
-      </p>
 
     </div>
   );
