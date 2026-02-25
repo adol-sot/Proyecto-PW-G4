@@ -18,7 +18,7 @@ import PresupuestoPage from "./pages/PresupuestoPage";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/Proyecto-PW-G4'>
       <Routes>
         <Route path='/' element={<LoginPage />}/>
         <Route path='/register' element={<RegisterPage />}/>
