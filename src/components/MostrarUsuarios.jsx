@@ -19,56 +19,64 @@ function MostrarUsuarios() {
     localStorage.setItem("usuarios", JSON.stringify(users));
   }, [users]);
 
+  // Estados para CREAR
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [correo, setCorreo] = useState("");
+
+  // Estados para EDITAR (separados)
+  const [editNombre, setEditNombre] = useState("");
+  const [editApellido, setEditApellido] = useState("");
+  const [editCorreo, setEditCorreo] = useState("");
+
   const [idEditar, setIdEditar] = useState(null);
   const [mostrarModal, setMostrarModal] = useState(false);
 
+  // Crear usuario
   function crearUsuario(e) {
-    if (e) e.preventDefault();
+    e.preventDefault();
 
-    if (idEditar === null) {
-      const nuevoUsuario = {
-        id: users.length + 1,
-        nombre: nombre,
-        apellido: apellido,
-        email: correo,
-        role: "Usuario",
-      };
+    const nuevoUsuario = {
+      id: users.length + 1,
+      nombre: nombre,
+      apellido: apellido,
+      email: correo,
+      role: "Usuario",
+    };
 
-      setUsers(users.concat(nuevoUsuario));
-      setNombre("");
-      setApellido("");
-      setCorreo("");
+    setUsers(users.concat(nuevoUsuario));
 
-    } else {
-      const usuariosActualizados = users.map(user =>
-        user.id === idEditar
-          ? {
-              ...user,
-              nombre: nombre,
-              apellido: apellido,
-              email: correo,
-            }
-          : user
-      );
-
-      setUsers(usuariosActualizados);
-      setIdEditar(null);
-      setMostrarModal(false);
-      setNombre("");
-      setApellido("");
-      setCorreo("");
-    }
+    setNombre("");
+    setApellido("");
+    setCorreo("");
   }
 
+  // Abrir modal editar
   function editarUsuario(user) {
-    setNombre(user.nombre);
-    setApellido(user.apellido);
-    setCorreo(user.email);
+    setEditNombre(user.nombre);
+    setEditApellido(user.apellido);
+    setEditCorreo(user.email);
     setIdEditar(user.id);
     setMostrarModal(true);
+  }
+
+  // Guardar edición
+  function guardarEdicion() {
+    const usuariosActualizados = users.map(user =>
+      user.id === idEditar
+        ? {
+            ...user,
+            nombre: editNombre,
+            apellido: editApellido,
+            email: editCorreo,
+          }
+        : user
+    );
+
+    setUsers(usuariosActualizados);
+
+    setMostrarModal(false);
+    setIdEditar(null);
   }
 
   function eliminarUsuario(id) {
@@ -154,7 +162,7 @@ function MostrarUsuarios() {
                 <td className="border p-2">{user.email}</td>
                 <td className="border p-2">{user.role}</td>
                 <td className="border p-2 text-center">
-                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                  <div className="flex gap-2 justify-center">
                     <button
                       onClick={() => editarUsuario(user)}
                       className="bg-green-600 text-white px-2 py-1 rounded"
@@ -181,33 +189,34 @@ function MostrarUsuarios() {
       {mostrarModal && (
         <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-            <h3 className="text-lg font-bold mb-4">Editar Usuario</h3>
+
+            <h3 className="text-lg font-bold mb-4">
+              Editar Usuario
+            </h3>
 
             <input
               type="text"
-              placeholder="Nombre"
-              value={nombre}
-              onChange={e => setNombre(e.target.value)}
+              value={editNombre}
+              onChange={e => setEditNombre(e.target.value)}
               className="border p-2 mb-2 w-full rounded"
             />
 
             <input
               type="text"
-              placeholder="Apellido"
-              value={apellido}
-              onChange={e => setApellido(e.target.value)}
+              value={editApellido}
+              onChange={e => setEditApellido(e.target.value)}
               className="border p-2 mb-2 w-full rounded"
             />
 
             <input
               type="email"
-              placeholder="Correo"
-              value={correo}
-              onChange={e => setCorreo(e.target.value)}
+              value={editCorreo}
+              onChange={e => setEditCorreo(e.target.value)}
               className="border p-2 mb-4 w-full rounded"
             />
 
             <div className="flex justify-end gap-2">
+
               <button
                 onClick={() => setMostrarModal(false)}
                 className="bg-gray-400 text-white px-3 py-1 rounded"
@@ -216,12 +225,14 @@ function MostrarUsuarios() {
               </button>
 
               <button
-                onClick={crearUsuario}
+                onClick={guardarEdicion}
                 className="bg-blue-600 text-white px-3 py-1 rounded"
               >
                 Guardar
               </button>
+
             </div>
+
           </div>
         </div>
       )}
