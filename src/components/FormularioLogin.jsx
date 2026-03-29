@@ -23,17 +23,17 @@ function FormularioLogin({ onLogin }) {
             <label className="ml-1"> Contraseña </label>
             <input className="border border-gray-300 rounded-md bg-gray-300 px-2 py-1 text-sm" type="password" 
             value={ contra } onChange={ contraOnChange }/>
-            <Link to="/cambiarcontra" className="text-sm mt-1 text-blue-900 hover:text-amber-600"> ¿Olvidaste tu contraseña? </Link>
+            <Link to="/recuperar-cuenta" className="text-sm mt-1 text-blue-900 hover:text-amber-600"> ¿Olvidaste tu contraseña? </Link>
         </div>
 
-        <div className="mt-4">
+        <form className="mt-4">
             <button className="mt-4 bg-yellow-300 w-full rounded-full py-2 text-black font-bold text-2xl hover:bg-amber-600 hover:text-white" type="button"
             onClick={ function() {
                 onLogin(correo, contra)
             } } >
                 Ingresar
             </button>
-        </div>
+        </form>
         <div>
             <Link to="/register" className="text-sm mt-4 place-self-center hover:underline"> ¿No tienes una cuenta? </Link>
         </div>

@@ -1,25 +1,50 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
+
 function Navegacion() {
     const [esAdmin, setEsAdmin] = useState(false)
 
     useEffect(function() {
-        const admin = localStorage.getItem("esAdmin")
-        if (admin === "true") {
+        const role = localStorage.getItem("USER_ROLE")
+        if (role === "admin") {
             setEsAdmin(true)
         } else {
             setEsAdmin(false)
         }
     }, [])
 
-    function handleLogout() {
-        localStorage.setItem("esAdmin", "false")
+    async function handleLogout() {
+        const token = localStorage.getItem("TOKEN")
+        const response = await fetch(`https://proyecto-pw-g4-backend-1.onrender.com/logout`, {
+            method: "DELETE",
+            body : JSON.stringify({
+                token : token,
+            }),
+            headers: {
+                "content-type" : "application/json"
+            }
+        })
+        
+        if (response.status != 200) {
+            const data = await response.json()
+            console.error("ERROR:", data)
+        }
+
+        const data = await response.json()
+        if (data.msg == "Logout exitoso") {
+            console.log("Logout exitoso")
+            localStorage.clear()
+        }
+        
     }
 
     return <nav className="bg-blue-500 shadow-lg py-4">
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-            <img className="h-12 rounded-xl" src="/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+            <div className="xs:visible ">
+                <img className="h-12 rounded-xl" src="/Proyecto-PW-G4/imagenes/Palisade_Logo2.jpeg" alt="Logo" />
+            </div>
+            
             <div className="flex items-center gap-4">
                 {esAdmin && (
                     <Link to="/adminmain" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
@@ -27,8 +52,8 @@ function Navegacion() {
                     </Link>
                 )}
                 {!esAdmin &&
-                <Link to="/usermainseguridad" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
-                    Seguridad
+                <Link to="/gastos-atipicos" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Gastos atipicos
                 </Link>
                 }
                 {!esAdmin &&
@@ -41,9 +66,21 @@ function Navegacion() {
                     Filtros
                 </Link>
                 }
+                {!esAdmin &&
+                <Link to="/usermainseguridad" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Cuenta
+                </Link>
+                }
+                {!esAdmin &&
+                  <Link to="/presupuesto" className="text-white font-medium px-4 py-2 rounded-full hover:bg-yellow-300 hover:text-black">
+                    Presupuesto
+                </Link>
+                }
                 <Link to="/" onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-full font-medium hover:bg-red-600">
                     Cerrar Sesión
                 </Link>
+              
+
             </div>
         </div>
     </nav>

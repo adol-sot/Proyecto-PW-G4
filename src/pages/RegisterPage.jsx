@@ -9,7 +9,7 @@ function RegisterPage() {
 
     return <div className="flex justify-center bg-blue-900 shadow-lg min-h-screen">
         <div className="border-2 rounded-4xl border-gray-300 shadow-md p-10 my-20 bg-white xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2"> 
-            <img className="w-2/3 place-self-center mx-auto" src="/imagenes/Palisade_Logo2.jpeg"/> 
+            <img className="w-2/3 place-self-center mx-auto" src="/Proyecto-PW-G4/imagenes/Palisade_Logo2.jpeg"/> 
             <div className="text-center mt-4">
                 <h1 className="text-4xl font-bold">Crear Cuenta</h1>
                 <h2 className="text-2xl mt-3">Regístrate para comenzar</h2>
